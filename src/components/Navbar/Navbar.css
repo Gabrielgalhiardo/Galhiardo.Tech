@@ -224,11 +224,14 @@
     background-color: var(--color-white);
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
     box-shadow: var(--shadow-lg);
     transform: translateX(-100%);
     transition: transform var(--transition-base);
     gap: var(--spacing-md);
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .navbar__menu--open {
@@ -237,12 +240,14 @@
 
   .navbar__menu li {
     width: 100%;
+    max-width: 100%;
   }
 
   .navbar__menu a {
     display: block;
     padding: var(--spacing-sm) 0;
     width: 100%;
+    max-width: 100%;
   }
 
   .navbar__cta {

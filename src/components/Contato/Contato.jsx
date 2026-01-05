@@ -67,7 +67,7 @@ const Contato = () => {
       icon: iconWhatsApp,
       title: 'WhatsApp',
       content: '+55 (11) 95086-9006',
-      link: 'https://wa.me/5511950869006'
+      link: `https://wa.me/5511950869006?text=${encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech.')}`
     }
   ];
 
