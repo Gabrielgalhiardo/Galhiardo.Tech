@@ -1,0 +1,123 @@
+.depoimentos {
+  padding: var(--spacing-3xl) 0;
+}
+
+.depoimentos__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--spacing-3xl);
+}
+
+.depoimentos__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-base-dark);
+}
+
+.depoimentos__subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+.depoimentos__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .depoimentos__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .depoimentos__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.depoimento-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-xl);
+}
+
+.depoimento-card__rating {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  color: var(--color-border);
+  font-size: 1.25rem;
+  transition: color var(--transition-fast);
+}
+
+.star--filled {
+  color: var(--color-accent);
+}
+
+.depoimento-card__text {
+  color: var(--color-text-gray);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+  font-style: italic;
+}
+
+.depoimento-card__author {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.depoimento-card__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-ice);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+}
+
+.depoimento-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.depoimento-card__info {
+  flex: 1;
+}
+
+.depoimento-card__name {
+  font-weight: 600;
+  color: var(--color-base-dark);
+  margin-bottom: 2px;
+  font-size: 1rem;
+}
+
+.depoimento-card__role {
+  color: var(--color-text-gray);
+  font-size: 0.875rem;
+  margin-bottom: 2px;
+}
+
+.depoimento-card__company {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+

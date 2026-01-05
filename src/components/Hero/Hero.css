@@ -1,0 +1,120 @@
+.hero {
+  padding-top: calc(var(--spacing-3xl) + 80px);
+  padding-bottom: var(--spacing-3xl);
+}
+
+.hero__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero__content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.hero__text {
+  max-width: 600px;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-base-dark);
+}
+
+.hero__highlight {
+  color: var(--color-primary);
+  position: relative;
+}
+
+.hero__description {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-text-gray);
+  margin-bottom: var(--spacing-xl);
+  max-width: 550px;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  max-width: 500px;
+  width: 100%;
+}
+
+.hero__card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.hero__card-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.hero__card h3 {
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-base-dark);
+}
+
+.hero__card p {
+  font-size: 0.875rem;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+.hero__card--1 {
+  animation-delay: 0.1s;
+}
+
+.hero__card--2 {
+  animation-delay: 0.2s;
+}
+
+.hero__card--3 {
+  animation-delay: 0.3s;
+}
+
+.hero__card--4 {
+  animation-delay: 0.4s;
+}
+
+@media (max-width: 768px) {
+  .hero__card-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+

@@ -1,0 +1,86 @@
+.servicos {
+  padding: var(--spacing-3xl) 0;
+}
+
+.servicos__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--spacing-3xl);
+}
+
+.servicos__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-base-dark);
+}
+
+.servicos__subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-gray);
+  margin: 0;
+}
+
+.servicos__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .servicos__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .servicos__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.servico-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-xl);
+}
+
+.servico-card__icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
+}
+
+.servico-card__title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-base-dark);
+}
+
+.servico-card__description {
+  color: var(--color-text-gray);
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+}
+
+.servico-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.servico-card__features li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-gray);
+  font-size: 0.9375rem;
+}
+
+.servico-card__check {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+

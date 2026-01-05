@@ -1,0 +1,135 @@
+.sobre {
+  padding: var(--spacing-3xl) 0;
+}
+
+.sobre__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+@media (min-width: 1024px) {
+  .sobre__content {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+}
+
+.sobre__text {
+  max-width: 600px;
+}
+
+.sobre__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-base-dark);
+}
+
+.sobre__description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text-gray);
+  margin-bottom: var(--spacing-md);
+}
+
+.sobre__cta {
+  margin-top: var(--spacing-xl);
+}
+
+.sobre__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .sobre__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: var(--color-ice);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card__number {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1;
+}
+
+.stat-card__label {
+  font-size: 0.9375rem;
+  color: var(--color-text-gray);
+  font-weight: 500;
+}
+
+.sobre__valores {
+  margin-top: var(--spacing-3xl);
+}
+
+.sobre__valores-title {
+  text-align: center;
+  font-size: clamp(1.75rem, 3vw, 2rem);
+  margin-bottom: var(--spacing-2xl);
+  color: var(--color-base-dark);
+}
+
+.sobre__valores-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .sobre__valores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.valor-card {
+  padding: var(--spacing-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.valor-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.valor-card__icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
+}
+
+.valor-card__title {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-base-dark);
+}
+
+.valor-card__description {
+  color: var(--color-text-gray);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
