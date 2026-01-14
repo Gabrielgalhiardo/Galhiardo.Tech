@@ -1,13 +1,13 @@
+import React from 'react';
 import './App.css';
+
+import { Routes, Route } from 'react-router-dom';
 import SEO from './components/SEO/SEO';
 import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import Servicos from './components/Servicos/Servicos';
-import Sobre from './components/Sobre/Sobre';
-import Depoimentos from './components/Depoimentos/Depoimentos';
-import Contato from './components/Contato/Contato';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
+import Home from './pages/Home';
+import ProjectDetails from './pages/ProjectDetails';
 
 function App() {
   return (
@@ -17,14 +17,14 @@ function App() {
         description="Transforme seu negócio com soluções digitais de alta performance. Consultoria em tecnologia, desenvolvimento web, arquitetura de software e transformação digital. Resultados mensuráveis e ROI comprovado. Solicite seu orçamento grátis!"
         image="/og-image.jpg"
       />
+
       <Navbar />
-      <main>
-        <Hero />
-        <Servicos />
-        <Sobre />
-        <Depoimentos />
-        <Contato />
-      </main>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projetos/:slug" element={<ProjectDetails />} />
+      </Routes>
+
       <Footer />
       <WhatsAppButton />
     </div>
