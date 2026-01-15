@@ -11,7 +11,7 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: visible;
   transition: all var(--transition-base);
   will-change: background-color, box-shadow;
 }
@@ -21,31 +21,34 @@
   box-shadow: var(--shadow-md);
 }
 
-  .navbar__container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-lg);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
+.navbar__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
   .navbar__container {
     padding: 0 var(--spacing-md);
     height: 80px;
   }
-  }
+}
 
 .navbar__logo {
   display: flex;
   align-items: center;
   height: 50px;
   transition: transform var(--transition-fast);
+  z-index: 1002;
+  position: relative;
 }
 
 .navbar__logo:hover {
@@ -55,6 +58,7 @@
 .navbar__logo img {
   height: 100%;
   width: auto;
+  pointer-events: auto;
 }
 
 /* Logo com nome - Desktop (maior) */
@@ -101,6 +105,10 @@
   border: none;
   cursor: pointer;
   padding: var(--spacing-xs);
+  z-index: 1002;
+  position: relative;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navbar__toggle span {
@@ -109,6 +117,8 @@
   background-color: var(--color-base-dark);
   border-radius: 2px;
   transition: all var(--transition-base);
+  display: block;
+  pointer-events: none;
 }
 
 .navbar__toggle span.active:nth-child(1) {
@@ -128,6 +138,8 @@
   align-items: center;
   gap: var(--spacing-lg);
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar__menu a {
@@ -137,6 +149,9 @@
   transition: color var(--transition-fast);
   position: relative;
   padding: var(--spacing-xs) 0;
+  pointer-events: auto;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .navbar__menu a:focus-visible {
@@ -174,25 +189,22 @@
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, box-shadow;
-  /* Melhor contraste e tamanho */
   padding: 0.75rem 1.75rem;
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  /* Contraste aprimorado */
   background-color: var(--color-primary);
   color: #FFFFFF;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
   border: 2px solid transparent;
+  pointer-events: auto;
 }
 
-/* Garantir contraste mínimo WCAG AA */
 .navbar__cta .btn:not(:hover):not(:active) {
   background-color: #1D4ED8;
   color: #FFFFFF;
 }
 
-/* Efeito de elevação e profundidade no hover */
 .navbar__cta .btn:hover {
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
@@ -201,7 +213,6 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Efeito de "press" ao clicar */
 .navbar__cta .btn:active {
   transform: translateY(-1px) scale(0.97);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
@@ -210,7 +221,6 @@
   color: #FFFFFF;
 }
 
-/* Efeito de brilho sutil no hover (shimmer effect) */
 .navbar__cta .btn::before {
   content: '';
   position: absolute;
@@ -231,14 +241,12 @@
   left: 100%;
 }
 
-/* Melhorar o estado de foco para acessibilidade */
 .navbar__cta .btn:focus-visible {
   outline: 3px solid var(--color-primary);
   outline-offset: 3px;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
 
-/* Animação sutil de pulso para chamar atenção */
 @keyframes subtle-pulse {
   0%, 100% {
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
@@ -248,12 +256,11 @@
   }
 }
 
-/* Aplicar animação apenas quando não está em hover */
 .navbar__cta .btn:not(:hover):not(:active) {
   animation: subtle-pulse 3s ease-in-out infinite;
 }
 
-/* Mobile */
+/* ========== MOBILE STYLES ========== */
 @media (max-width: 768px) {
   .navbar__toggle {
     display: flex;
@@ -264,29 +271,43 @@
     top: 80px;
     left: 0;
     right: 0;
+    bottom: 0;
+    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
     background-color: var(--color-white);
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-md);
     box-shadow: var(--shadow-lg);
-    transform: translateX(-100%);
-    transition: transform var(--transition-base);
     gap: var(--spacing-md);
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
-    max-height: calc(100vh - 80px);
     overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1001;
+    margin: 0;
+    
+    /* Estado inicial - escondido à esquerda */
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .navbar__menu--open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .navbar__menu li {
     width: 100%;
     max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .navbar__menu a {
@@ -294,12 +315,13 @@
     padding: var(--spacing-sm) 0;
     width: 100%;
     max-width: 100%;
+    font-size: 1.125rem;
   }
 
   .navbar__cta {
     margin-left: 0;
     width: 100%;
-    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
   }
 
   .navbar__cta .btn {
@@ -310,8 +332,29 @@
   }
 }
 
-/* Desktop - Tamanho otimizado */
+/* ========== DESKTOP STYLES ========== */
 @media (min-width: 769px) {
+  .navbar__toggle {
+    display: none !important;
+  }
+
+  .navbar__menu {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    flex-direction: row !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    width: auto !important;
+    max-width: none !important;
+    bottom: auto !important;
+  }
+  
   .navbar__cta .btn {
     padding: 0.75rem 1.75rem;
     font-size: 0.9375rem;
@@ -319,7 +362,7 @@
   }
 }
 
-/* Telas muito grandes - Aumentar ainda mais a visibilidade */
+/* Telas muito grandes */
 @media (min-width: 1200px) {
   .navbar__cta .btn {
     padding: 0.875rem 2rem;
@@ -327,4 +370,3 @@
     min-width: 180px;
   }
 }
-

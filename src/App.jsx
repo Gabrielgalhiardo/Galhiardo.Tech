@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
@@ -11,6 +11,34 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 
 function App() {
+  useEffect(() => {
+    // Desabilitar arrastar em todas as imagens
+    const disableImageDrag = () => {
+      const images = document.querySelectorAll('img');
+      images.forEach((img) => {
+        img.setAttribute('draggable', 'false');
+        img.addEventListener('dragstart', (e) => {
+          e.preventDefault();
+          return false;
+        });
+      });
+    };
+
+    // Executar imediatamente e observar mudanças no DOM
+    disableImageDrag();
+
+    // Observar mudanças no DOM para novas imagens
+    const observer = new MutationObserver(disableImageDrag);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="app">
       <SEO

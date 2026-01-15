@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/img/logo.svg';
@@ -10,6 +10,8 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,44 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Bloquear scroll do body quando menu mobile estiver aberto
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    // Fechar menu ao clicar fora
+    const handleClickOutside = (e) => {
+      if (
+        isMobileMenuOpen &&
+        menuRef.current &&
+        toggleRef.current &&
+        !menuRef.current.contains(e.target) &&
+        !toggleRef.current.contains(e.target)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+  };
+
+    if (isMobileMenuOpen) {
+      // Delay para evitar fechar imediatamente ao clicar no toggle
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('touchstart', handleClickOutside);
+      };
+    }
+  }, [isMobileMenuOpen]);
 
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
@@ -65,6 +105,12 @@ const Navbar = () => {
     }
   };
 
+  const handleToggleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsMobileMenuOpen(prev => !prev);
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
@@ -74,16 +120,22 @@ const Navbar = () => {
         </a>
 
         <button
+          ref={toggleRef}
           className="navbar__toggle"
           aria-label="Toggle menu"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          onClick={handleToggleClick}
+          type="button"
         >
           <span className={isMobileMenuOpen ? 'active' : ''}></span>
           <span className={isMobileMenuOpen ? 'active' : ''}></span>
           <span className={isMobileMenuOpen ? 'active' : ''}></span>
         </button>
 
-        <ul className={`navbar__menu ${isMobileMenuOpen ? 'navbar__menu--open' : ''}`}>
+        <ul 
+          ref={menuRef}
+          className={`navbar__menu ${isMobileMenuOpen ? 'navbar__menu--open' : ''}`}
+        >
           <li>
             <a href="#home" onClick={(e) => handleLinkClick(e, 'home')}>Início</a>
           </li>
@@ -118,4 +170,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

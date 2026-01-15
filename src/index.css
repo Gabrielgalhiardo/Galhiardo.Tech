@@ -226,3 +226,55 @@ a:hover {
   color: var(--color-base-dark);
 }
 
+/* Desabilitar seleção de texto em todos os elementos */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Permitir seleção apenas em inputs e textareas */
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Desabilitar arrastar em todas as imagens */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+}
+
+/* Desabilitar arrastar em todos os elementos */
+* {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+/* Permitir interação em elementos clicáveis */
+a,
+button,
+[role="button"],
+[onclick],
+.clickable,
+.project-gallery__item,
+.lightbox__image,
+.card-image-container {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
