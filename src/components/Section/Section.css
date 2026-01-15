@@ -1,6 +1,19 @@
 .section {
   padding: var(--spacing-3xl) 0;
   width: 100%;
+  position: relative;
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--spacing-xl) 0;
+    scroll-margin-top: 80px;
+  }
+  
+  .section__container {
+    padding: 0 var(--spacing-md);
+  }
 }
 
 .section--default {
@@ -34,11 +47,19 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+  position: relative;
 }
 
 @media (min-width: 768px) {
   .section__container {
     padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Melhoria de scroll suave */
+@media (prefers-reduced-motion: no-preference) {
+  .section {
+    scroll-behavior: smooth;
   }
 }
 

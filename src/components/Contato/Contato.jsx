@@ -16,46 +16,82 @@ const Contato = () => {
     mensagem: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  // Função para aplicar máscara de telefone brasileiro
+  const applyPhoneMask = (value) => {
+    // Remove tudo que não é dígito
+    const numbers = value.replace(/\D/g, '');
+    
+    // Limita a 11 dígitos (DDD + 9 dígitos para celular)
+    const limitedNumbers = numbers.slice(0, 11);
+    
+    // Aplica a máscara conforme o tamanho
+    if (limitedNumbers.length === 0) {
+      return '';
+    } else if (limitedNumbers.length <= 2) {
+      return `(${limitedNumbers}`;
+    } else if (limitedNumbers.length <= 6) {
+      return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2)}`;
+    } else if (limitedNumbers.length <= 10) {
+      // Telefone fixo (10 dígitos)
+      return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2, 6)}-${limitedNumbers.slice(6)}`;
+    } else {
+      // Telefone celular (11 dígitos)
+      return `(${limitedNumbers.slice(0, 2)}) ${limitedNumbers.slice(2, 7)}-${limitedNumbers.slice(7, 11)}`;
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Aplica máscara apenas no campo telefone
+    if (name === 'telefone') {
+      const maskedValue = applyPhoneMask(value);
+      setFormData(prev => ({
+        ...prev,
+        [name]: maskedValue
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleWhatsAppRedirect = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-   
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        nome: '',
-        email: '',
-        telefone: '',
-        empresa: '',
-        mensagem: ''
-      });
-      
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
-    }, 1500);
+    
+    // Formata a mensagem com os dados do formulário
+    let mensagem = 'Olá! Gostaria de entrar em contato sobre os serviços da Galhiardo.tech.\n\n';
+    
+    if (formData.nome) {
+      mensagem += `*Nome:* ${formData.nome}\n`;
+    }
+    if (formData.email) {
+      mensagem += `*Email:* ${formData.email}\n`;
+    }
+    if (formData.telefone) {
+      mensagem += `*Telefone:* ${formData.telefone}\n`;
+    }
+    if (formData.empresa) {
+      mensagem += `*Empresa:* ${formData.empresa}\n`;
+    }
+    if (formData.mensagem) {
+      mensagem += `\n*Mensagem:*\n${formData.mensagem}`;
+    }
+    
+    const phoneNumber = '5511950869006';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensagem)}`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   const contatoInfo = [
     {
       icon: iconEmail,
       title: 'Email',
-      content: 'galhiardogabriel@gmail.com',
-      link: 'mailto:galhiardogabriel@gmail.com'
+      content: 'galhiardoTech@gmail.com',
+      link: 'mailto:galhiardoTech@gmail.com'
     },
     {
       icon: iconPhone,
@@ -83,11 +119,17 @@ const Contato = () => {
       <div className="contato__content">
         <div className="contato__form-wrapper">
           <Card variant="elevated" className="contato__form-card">
-            <form className="contato__form" onSubmit={handleSubmit}>
+            <div className="contato__form-header">
+              <h3 className="contato__form-title">Preencha seus dados</h3>
+              <p className="contato__form-subtitle">
+                Envie sua mensagem diretamente pelo WhatsApp
+              </p>
+            </div>
+            <form className="contato__form" onSubmit={handleWhatsAppRedirect}>
               <div className="contato__form-row">
                 <div className="contato__form-group">
                   <label htmlFor="nome" className="contato__label">
-                    Nome Completo *
+                    Nome Completo
                   </label>
                   <input
                     type="text"
@@ -95,7 +137,6 @@ const Contato = () => {
                     name="nome"
                     value={formData.nome}
                     onChange={handleChange}
-                    required
                     className="contato__input"
                     placeholder="Seu nome"
                   />
@@ -103,7 +144,7 @@ const Contato = () => {
 
                 <div className="contato__form-group">
                   <label htmlFor="email" className="contato__label">
-                    Email *
+                    Email
                   </label>
                   <input
                     type="email"
@@ -111,7 +152,6 @@ const Contato = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
                     className="contato__input"
                     placeholder="seu@email.com"
                   />
@@ -131,6 +171,7 @@ const Contato = () => {
                     onChange={handleChange}
                     className="contato__input"
                     placeholder="(11) 99999-9999"
+                    maxLength={15}
                   />
                 </div>
 
@@ -152,34 +193,27 @@ const Contato = () => {
 
               <div className="contato__form-group">
                 <label htmlFor="mensagem" className="contato__label">
-                  Mensagem *
+                  Mensagem
                 </label>
                 <textarea
                   id="mensagem"
                   name="mensagem"
                   value={formData.mensagem}
                   onChange={handleChange}
-                  required
                   rows="6"
                   className="contato__textarea"
                   placeholder="Conte-nos sobre seu projeto ou necessidade..."
                 />
               </div>
 
-              {submitStatus === 'success' && (
-                <div className="contato__success">
-                  ✓ Mensagem enviada com sucesso! Entraremos em contato em breve.
-                </div>
-              )}
-
               <Button
                 type="submit"
                 variant="primary"
                 size="lg"
-                disabled={isSubmitting}
                 className="contato__submit"
               >
-                {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+                <span className="contato__submit-icon">💬</span>
+                Enviar pelo WhatsApp
               </Button>
             </form>
           </Card>

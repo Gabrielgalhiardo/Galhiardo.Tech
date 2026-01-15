@@ -1,12 +1,21 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO/SEO';
 import { getProjectBySlug } from '../data/projects';
 import './ProjectDetails.css';
 
 const ProjectDetails = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const project = getProjectBySlug(slug);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNavigateToSection = (e, sectionId) => {
+    e.preventDefault();
+    navigate(`/#${sectionId}`, { replace: false });
+    // O ScrollToTop vai lidar com o scroll para a seção
+  };
 
   if (!project) {
     return (
@@ -35,6 +44,49 @@ const ProjectDetails = () => {
     results = [],
     gallery = [],
   } = project;
+
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = '';
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % gallery.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+  };
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setLightboxOpen(false);
+        document.body.style.overflow = '';
+      } else if (e.key === 'ArrowRight') {
+        setCurrentImageIndex((prev) => (prev + 1) % gallery.length);
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentImageIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, gallery.length]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
     <main className="project-details">
@@ -90,25 +142,91 @@ const ProjectDetails = () => {
             <h3>Galeria do projeto</h3>
             <p>Alguns recortes das jornadas principais.</p>
           </div>
-          <Link to="/#contato" className="project-gallery__cta">Quero algo assim</Link>
+          <a 
+            href="#contato" 
+            className="project-gallery__cta"
+            onClick={(e) => handleNavigateToSection(e, 'contato')}
+          >
+            Quero algo assim
+          </a>
         </div>
         <div className="project-gallery__grid">
           {gallery.map((item, index) => (
-            <figure key={`${item.alt}-${index}`}>
+            <figure 
+              key={`${item.alt}-${index}`}
+              className="project-gallery__item"
+              onClick={() => openLightbox(index)}
+            >
               <img src={item.src} alt={item.alt} />
               <figcaption>{item.alt}</figcaption>
+              <div className="project-gallery__overlay">
+                <span className="project-gallery__zoom-icon">🔍</span>
+              </div>
             </figure>
           ))}
         </div>
       </section>
 
+      {lightboxOpen && gallery.length > 0 && (
+        <div className="lightbox" onClick={closeLightbox}>
+          <button 
+            className="lightbox__close"
+            onClick={closeLightbox}
+            aria-label="Fechar visualização"
+          >
+            ✕
+          </button>
+          <button 
+            className="lightbox__nav lightbox__nav--prev"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+            aria-label="Imagem anterior"
+          >
+            ‹
+          </button>
+          <button 
+            className="lightbox__nav lightbox__nav--next"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            aria-label="Próxima imagem"
+          >
+            ›
+          </button>
+          <div className="lightbox__content" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={gallery[currentImageIndex].src} 
+              alt={gallery[currentImageIndex].alt}
+              className="lightbox__image"
+            />
+            <div className="lightbox__caption">
+              <p>{gallery[currentImageIndex].alt}</p>
+              <span className="lightbox__counter">
+                {currentImageIndex + 1} / {gallery.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="project-details__footer">
-        <Link to="/#projetos" className="project-details__back">
+        <a 
+          href="#projetos" 
+          className="project-details__back"
+          onClick={(e) => handleNavigateToSection(e, 'projetos')}
+        >
           Voltar para projetos
-        </Link>
-        <Link to="/#contato" className="project-details__primary">
+        </a>
+        <a 
+          href="#contato" 
+          className="project-details__primary"
+          onClick={(e) => handleNavigateToSection(e, 'contato')}
+        >
           Discutir um projeto
-        </Link>
+        </a>
       </div>
     </main>
   );

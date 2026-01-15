@@ -11,11 +11,15 @@
   text-decoration: none;
   font-family: var(--font-family);
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
 }
 
-.btn:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
 
 /* Variantes */
@@ -27,8 +31,13 @@
 
 .btn--primary:hover {
   background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn--primary:active {
+  transform: translateY(0) scale(0.98);
+  transition: all 0.1s ease;
 }
 
 .btn--secondary {
@@ -52,6 +61,13 @@
   border-color: var(--color-primary);
   color: var(--color-primary);
   background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--outline:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 /* Tamanhos */
@@ -75,5 +91,31 @@
   opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.9375rem;
+    min-height: 44px; /* Tamanho mínimo para touch targets */
+  }
+  
+  .btn--sm {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    min-height: 40px;
+  }
+  
+  .btn--md {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+    min-height: 44px;
+  }
+  
+  .btn--lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-height: 48px;
+  }
 }
 

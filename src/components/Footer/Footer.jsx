@@ -53,7 +53,7 @@ const Footer = () => {
               <h4>Contato</h4>
               <ul>
                 <li>
-                  <a href="mailto:galhiardogabriel@gmail.com">galhiardogabriel@gmail.com</a>
+                  <a href="mailto:galhiardoTech@gmail.com">galhiardoTech@gmail.com</a>
                 </li>
                 <li>
                   <a href="tel:+5511950869006">+55 (11) 95086-9006</a>

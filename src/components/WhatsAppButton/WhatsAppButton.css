@@ -14,16 +14,24 @@
   transition: all var(--transition-base);
   text-decoration: none;
   cursor: pointer;
+  will-change: transform, box-shadow;
 }
 
 .whatsapp-button:hover {
   background-color: #20BA5A;
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6);
 }
 
 .whatsapp-button:active {
-  transform: scale(0.95);
+  transform: scale(1.05) rotate(0deg);
+  transition: all 0.1s ease;
+}
+
+.whatsapp-button:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.5);
+  outline-offset: 4px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 4px rgba(37, 211, 102, 0.2);
 }
 
 .whatsapp-icon {
@@ -32,20 +40,17 @@
   color: var(--color-white);
 }
 
-/* Animação de pulso opcional */
+/* Animação de pulso melhorada */
 @keyframes pulse {
-  0% {
+  0%, 100% {
     box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
   }
   50% {
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.6);
-  }
-  100% {
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.6), 0 0 0 8px rgba(37, 211, 102, 0.1);
   }
 }
 
-.whatsapp-button {
+.whatsapp-button:not(:hover):not(:active) {
   animation: pulse 2s ease-in-out infinite;
 }
 

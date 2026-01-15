@@ -70,3 +70,57 @@
 
 .nav-button.prev { left: 30px; }
 .nav-button.next { right: 30px; }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .carousel-container {
+    height: 500px;
+    margin: 24px auto;
+    perspective: 800px;
+  }
+  
+  .card-wrapper {
+    width: 280px;
+    height: 420px;
+  }
+  
+  .nav-button {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  
+  .nav-button.prev {
+    left: 12px;
+  }
+  
+  .nav-button.next {
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    height: 450px;
+    margin: 20px auto;
+  }
+  
+  .card-wrapper {
+    width: 240px;
+    height: 360px;
+  }
+  
+  .nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  
+  .nav-button.prev {
+    left: 8px;
+  }
+  
+  .nav-button.next {
+    right: 8px;
+  }
+}

@@ -104,6 +104,14 @@ p {
   margin-bottom: var(--spacing-md);
 }
 
+@media (max-width: 768px) {
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
 /* Links */
 a {
   color: var(--color-primary);
@@ -179,12 +187,29 @@ a:hover {
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
   }
 
   .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Smooth scroll behavior melhorado */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+}
+
+/* Melhorias de performance para animações */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 

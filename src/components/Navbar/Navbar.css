@@ -3,7 +3,9 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
   z-index: 1000;
   width: 100%;
@@ -11,9 +13,11 @@
   box-sizing: border-box;
   overflow-x: hidden;
   transition: all var(--transition-base);
+  will-change: background-color, box-shadow;
 }
 
 .navbar--scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
   box-shadow: var(--shadow-md);
 }
 
@@ -31,9 +35,10 @@
   }
 
   @media (max-width: 768px) {
-    .navbar__container {
-      padding: 0 var(--spacing-md);
-    }
+  .navbar__container {
+    padding: 0 var(--spacing-md);
+    height: 80px;
+  }
   }
 
 .navbar__logo {
@@ -131,6 +136,13 @@
   font-size: 1rem;
   transition: color var(--transition-fast);
   position: relative;
+  padding: var(--spacing-xs) 0;
+}
+
+.navbar__menu a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .navbar__menu a::after {
@@ -153,7 +165,7 @@
 }
 
 .navbar__cta {
-  margin-left: var(--spacing-sm);
+  margin-left: var(--spacing-md);
 }
 
 /* Estilos avançados de UX/UI para o botão CTA */
@@ -162,22 +174,40 @@
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, box-shadow;
+  /* Melhor contraste e tamanho */
+  padding: 0.75rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  /* Contraste aprimorado */
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  border: 2px solid transparent;
+}
+
+/* Garantir contraste mínimo WCAG AA */
+.navbar__cta .btn:not(:hover):not(:active) {
+  background-color: #1D4ED8;
+  color: #FFFFFF;
 }
 
 /* Efeito de elevação e profundidade no hover */
 .navbar__cta .btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-  background-color: var(--color-primary-hover);
-  color: var(--color-white);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+  background-color: #1E40AF;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Efeito de "press" ao clicar */
 .navbar__cta .btn:active {
-  transform: translateY(-1px) scale(0.98);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px) scale(0.97);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   transition: all 0.1s ease;
-  color: var(--color-white);
+  background-color: #1E3A8A;
+  color: #FFFFFF;
 }
 
 /* Efeito de brilho sutil no hover (shimmer effect) */
@@ -211,14 +241,14 @@
 /* Animação sutil de pulso para chamar atenção */
 @keyframes subtle-pulse {
   0%, 100% {
-    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
   }
   50% {
-    box-shadow: 0 4px 12px -1px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
   }
 }
 
-/* Aplicar animação apenas quando não está em hover (opcional) */
+/* Aplicar animação apenas quando não está em hover */
 .navbar__cta .btn:not(:hover):not(:active) {
   animation: subtle-pulse 3s ease-in-out infinite;
 }
@@ -231,7 +261,7 @@
 
   .navbar__menu {
     position: fixed;
-    top: 100px;
+    top: 80px;
     left: 0;
     right: 0;
     background-color: var(--color-white);
@@ -246,6 +276,8 @@
     width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
 
   .navbar__menu--open {
@@ -267,10 +299,32 @@
   .navbar__cta {
     margin-left: 0;
     width: 100%;
+    margin-top: var(--spacing-xs);
   }
 
   .navbar__cta .btn {
     width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+/* Desktop - Tamanho otimizado */
+@media (min-width: 769px) {
+  .navbar__cta .btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.9375rem;
+    min-width: 160px;
+  }
+}
+
+/* Telas muito grandes - Aumentar ainda mais a visibilidade */
+@media (min-width: 1200px) {
+  .navbar__cta .btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
   }
 }
 

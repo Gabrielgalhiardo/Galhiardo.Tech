@@ -6,6 +6,7 @@ import SEO from './components/SEO/SEO';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 
@@ -18,6 +19,7 @@ function App() {
         image="/og-image.jpg"
       />
 
+      <ScrollToTop />
       <Navbar />
 
       <Routes>

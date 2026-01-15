@@ -58,3 +58,24 @@ section {
   scroll-margin-top: 100px;
 }
 
+/* Melhorias de performance */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Melhorias de acessibilidade para links */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Melhorias de contraste para texto */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text-gray: #1e293b;
+    --color-border: #cbd5e1;
+  }
+}
+

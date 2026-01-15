@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/img/logo.svg';
 import logoWithName from '../../assets/img/logo_with_name.svg';
@@ -6,6 +7,9 @@ import logoWithName from '../../assets/img/logo_with_name.svg';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,20 +23,52 @@ const Navbar = () => {
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offsetTop = element.offsetTop - 100;
+
+    // Se estiver na home, faz scroll para a seção
+    if (isHomePage) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const offsetTop = element.offsetTop - 100;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // Se estiver em outra página, redireciona para home com a seção
+      navigate(`/#${targetId}`, { replace: false });
+      // Aguarda a navegação e depois faz scroll
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const offsetTop = element.offsetTop - 100;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    if (isHomePage) {
       window.scrollTo({
-        top: offsetTop,
+        top: 0,
         behavior: 'smooth'
       });
+    } else {
+      navigate('/');
     }
   };
 
   return (
     <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
-        <a href="#home" className="navbar__logo" onClick={(e) => handleLinkClick(e, 'home')}>
+        <a href="/" className="navbar__logo" onClick={handleLogoClick}>
           <img src={logoWithName} alt="Galhiardo Tech" className="navbar__logo--desktop" />
           <img src={logo} alt="Galhiardo Tech" className="navbar__logo--mobile" />
         </a>
@@ -55,6 +91,9 @@ const Navbar = () => {
             <a href="#servicos" onClick={(e) => handleLinkClick(e, 'servicos')}>Serviços</a>
           </li>
           <li>
+            <a href="#projetos" onClick={(e) => handleLinkClick(e, 'projetos')}>Projetos</a>
+          </li>
+          <li>
             <a href="#sobre" onClick={(e) => handleLinkClick(e, 'sobre')}>Sobre</a>
           </li>
           <li>
@@ -66,7 +105,7 @@ const Navbar = () => {
           <li className="navbar__cta">
             <a 
               href="#contato" 
-              className="btn btn--primary btn--sm"
+              className="btn btn--primary"
               onClick={(e) => handleLinkClick(e, 'contato')}
             >
               Orçamento Grátis

@@ -1,14 +1,78 @@
+import { useEffect, useRef } from 'react';
 import './Sobre.css';
 import Section from '../Section/Section';
 import Button from '../Button/Button';
+import AnimatedCounter from './AnimatedCounter';
 
 const Sobre = () => {
-  // DICA: Ajustei os números para parecerem mais consistentes com uma consultoria premium
+  const sobreRef = useRef(null);
+
+  useEffect(() => {
+    // Animação de entrada para os stat-cards
+    const statCards = document.querySelectorAll('.stat-card');
+    const statObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0) scale(1)';
+            }, index * 150);
+            statObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    statCards.forEach((card) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px) scale(0.9)';
+      card.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      statObserver.observe(card);
+    });
+
+    // Animação de entrada para os cards de valores
+    if (sobreRef.current) {
+      const valorCards = sobreRef.current.querySelectorAll('.valor-card');
+      const valorObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }, index * 100);
+              valorObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      valorCards.forEach((card) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        valorObserver.observe(card);
+      });
+    }
+
+    return () => {
+      statObserver.disconnect();
+      if (sobreRef.current) {
+        const valorObserver = new IntersectionObserver(() => {});
+        valorObserver.disconnect();
+      }
+    };
+  }, []);
+
+  // Stats com configuração para animação
   const stats = [
-    { number: '100%', label: 'Compromisso com Prazo' }, // Mais forte que "3 projetos"
-    { number: '24/7', label: 'Sua Empresa Online' },
-    { number: '3+', label: 'Anos de Desenvolvimento' },
-    { number: 'Top', label: 'Performance Google' }
+    { number: '100', suffix: '%', label: 'Compromisso com Prazo', duration: 2000 },
+    { number: '24/7', label: 'Sua Empresa Online', duration: 1500 },
+    { number: '3', suffix: '+', label: 'Anos de Desenvolvimento', duration: 1800 },
+    { number: 'Top', label: 'Performance Google', duration: 1000 }
   ];
 
   const valores = [
@@ -38,13 +102,14 @@ const Sobre = () => {
     <Section id="sobre" variant="default" className="sobre">
       <div className="sobre__content">
         <div className="sobre__text">
-          <h2 className="sobre__title">Por que a <span style={{color: 'var(--primary)'}}>Galhiardo.tech</span>?</h2>
+          <h2 className="sobre__title">
+            Por que a <span className="sobre__title-highlight">Galhiardo.tech</span>?
+          </h2>
           
-          {/* TEXTO ATUALIZADO AQUI */}
           <p className="sobre__description">
             Muitas agências entregam apenas um visual bonito. Nós entregamos <strong>engenharia de negócios</strong>. 
             A Galhiardo.tech nasceu para preencher a lacuna entre a programação complexa e a necessidade simples 
-            da sua empresa: vender mais e aparecer bem na internet.
+            da sua empresa: <strong>vender mais e aparecer bem na internet</strong>.
           </p>
           <p className="sobre__description">
             Utilizamos as mesmas tecnologias de grandes startups (como React e Next.js) para criar sites e sistemas 
@@ -72,14 +137,21 @@ const Sobre = () => {
         <div className="sobre__stats">
           {stats.map((stat, index) => (
             <div key={index} className="stat-card">
-              <div className="stat-card__number">{stat.number}</div>
+              <div className="stat-card__number">
+                <AnimatedCounter 
+                  value={stat.number}
+                  suffix={stat.suffix || ''}
+                  duration={stat.duration || 2000}
+                  decimals={0}
+                />
+              </div>
               <div className="stat-card__label">{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="sobre__valores">
+      <div className="sobre__valores" ref={sobreRef}>
         <h3 className="sobre__valores-title">Nossos Diferenciais</h3>
         <div className="sobre__valores-grid">
           {valores.map((valor, index) => (
