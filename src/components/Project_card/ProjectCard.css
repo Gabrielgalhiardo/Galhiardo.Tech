@@ -31,13 +31,9 @@
   overflow: hidden;
   cursor: pointer;
   position: relative;
-}
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Efeito de zoom na imagem ao passar o mouse */

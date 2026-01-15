@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProjectCard.css';
 
-const ProjectCard = ({ title, description, image, link, onClick }) => {
+const ProjectCard = ({ title, description, image, logo, link, onClick }) => {
   const handleCardClick = () => {
     if (onClick) {
       onClick();
@@ -24,8 +24,10 @@ const ProjectCard = ({ title, description, image, link, onClick }) => {
       }}
       aria-label={`Abrir projeto ${title}`}
     >
-      <div className="card-image-container">
-        <img src={image} alt={title} className="card-image" />
+      <div 
+        className="card-image-container"
+        style={logo ? { backgroundImage: `url(${logo})` } : {}}
+      >
         <div className="click-overlay">
           <span>Ver Projeto ➜</span>
         </div>

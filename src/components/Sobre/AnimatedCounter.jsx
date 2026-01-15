@@ -7,7 +7,13 @@ const AnimatedCounter = ({
   prefix = '',
   decimals = 0 
 }) => {
-  const [count, setCount] = useState(0);
+  // Extrai sufixo do valor se existir (ex: "24h" -> sufixo: "h")
+  const valueStr = String(value);
+  const match = valueStr.match(/^(\d+(?:\.\d+)?)(.*)$/);
+  const extractedSuffix = match ? match[2] : '';
+  const finalSuffix = extractedSuffix || suffix;
+  
+  const [count, setCount] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const counterRef = useRef(null);
 
@@ -35,12 +41,26 @@ const AnimatedCounter = ({
   useEffect(() => {
     if (!isVisible) return;
 
-    // Se o valor não é numérico (ex: "24/7", "Top"), apenas mostra o valor
-    const numericValue = parseFloat(value);
+    // Extrai número e sufixo do valor (ex: "24h" -> número: 24, sufixo: "h")
+    const match = valueStr.match(/^(\d+(?:\.\d+)?)(.*)$/);
+    
+    // Se não tem número no início, trata como string não numérica
+    if (!match) {
+      setCount(value);
+      return;
+    }
+
+    const numericValue = parseFloat(match[1]);
+    const extractedSuffix = match[2] || ''; // Sufixo extraído do valor (ex: "h")
+    const finalSuffix = extractedSuffix || suffix; // Usa o sufixo extraído ou o prop
+
     if (isNaN(numericValue)) {
       setCount(value);
       return;
     }
+
+    // Inicializa com 0 + sufixo para começar a animação
+    setCount('0' + finalSuffix);
 
     let startTime = null;
     const startValue = 0;
@@ -54,20 +74,23 @@ const AnimatedCounter = ({
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const currentValue = startValue + (endValue - startValue) * easeOut;
       
-      setCount(currentValue.toFixed(decimals));
+      setCount(currentValue.toFixed(decimals) + finalSuffix);
       
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
-        setCount(endValue.toFixed(decimals));
+        setCount(endValue.toFixed(decimals) + finalSuffix);
       }
     };
 
     requestAnimationFrame(animate);
-  }, [isVisible, value, duration, decimals]);
+  }, [isVisible, value, duration, decimals, suffix, valueStr]);
 
-  // Se não é numérico, retorna o valor original com animação de fade-in
-  if (isNaN(parseFloat(value))) {
+  // Verifica se o valor tem número no início
+  const hasNumber = /^\d/.test(valueStr);
+  
+  // Se não tem número no início, retorna o valor original com animação de fade-in
+  if (!hasNumber) {
     return (
       <span 
         ref={counterRef}
@@ -83,7 +106,7 @@ const AnimatedCounter = ({
 
   return (
     <span ref={counterRef}>
-      {prefix}{count}{suffix}
+      {prefix}{count}
     </span>
   );
 };

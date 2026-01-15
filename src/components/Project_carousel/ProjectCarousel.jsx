@@ -8,7 +8,7 @@ const ProjectCarousel = () => {
   const [active, setActive] = useState(0);
   const timeoutRef = useRef(null);
   const navigate = useNavigate();
-  const delay = 2000; // Um pouco mais lento para apreciar os cards grandes
+  const delay = 3500; // Um pouco mais lento para apreciar os cards grandes
 
   const getMod = (n, m) => ((n % m) + m) % m;
 
@@ -73,7 +73,7 @@ const ProjectCarousel = () => {
               <ProjectCard 
                 title={project.title}
                 description={project.description}
-                image={project.carouselImage || project.coverImage}
+                logo={project.logo}
                 onClick={() => handleOpenProject(project.slug)}
               />
             </div>

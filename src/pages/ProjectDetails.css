@@ -55,12 +55,11 @@
   padding: 14px;
   box-shadow: 0 25px 60px rgba(15, 23, 42, 0.1);
   border: 1px solid #e2e8f0;
-}
-
-.project-details__hero-media img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
   width: 100%;
-  display: block;
-  border-radius: 12px;
 }
 
 .project-details__grid {

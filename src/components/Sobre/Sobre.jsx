@@ -70,7 +70,7 @@ const Sobre = () => {
   // Stats com configuração para animação
   const stats = [
     { number: '100', suffix: '%', label: 'Compromisso com Prazo', duration: 2000 },
-    { number: '24/7', label: 'Sua Empresa Online', duration: 1500 },
+    { number: '24h', label: 'Sua Empresa Online', duration: 1500 },
     { number: '3', suffix: '+', label: 'Anos de Desenvolvimento', duration: 1800 },
     { number: 'Top', label: 'Performance Google', duration: 1000 }
   ];

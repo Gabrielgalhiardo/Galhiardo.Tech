@@ -1,4 +1,5 @@
-import geniallCover from '../assets/img/projetos/GeniAll/chamadaPraAcao.png';
+import geniallCover from '../assets/img/projetos/GeniAll/jogo.png';
+import geniallLogo from '../assets/img/projetos/GeniAll/logo.png';
 import geniallHistoria from '../assets/img/projetos/GeniAll/historia.png';
 import geniallJogo from '../assets/img/projetos/GeniAll/jogo.png';
 import geniallJogoMemoria from '../assets/img/projetos/GeniAll/jogoDaMemoria.png';
@@ -9,6 +10,7 @@ import geniallRegistro from '../assets/img/projetos/GeniAll/registro.png';
 import geniallVerdadeiroOuFalso from '../assets/img/projetos/GeniAll/verdadeiroOuFalso.png';
 
 import skilloCover from '../assets/img/projetos/Skillo/chamadaPraAcao.png';
+import skilloLogo from '../assets/img/projetos/Skillo/logo.png';
 import skilloAgendamentos from '../assets/img/projetos/Skillo/agendamentos.png';
 import skilloAulas from '../assets/img/projetos/Skillo/aulas.png';
 import skilloConfiguracaoPerfil from '../assets/img/projetos/Skillo/configuracaoPerfil.png';
@@ -24,6 +26,7 @@ import skilloRegistro from '../assets/img/projetos/Skillo/registro.png';
 import skilloTirarFoto from '../assets/img/projetos/Skillo/tirarFoto.png';
 
 import storeCover from '../assets/img/projetos/GabrielStore/sobre.png';
+import storeLogo from '../assets/img/projetos/GabrielStore/logo.jpg';
 import storeLogin from '../assets/img/projetos/GabrielStore/login.png';
 import storeProdutos from '../assets/img/projetos/GabrielStore/produtos.png';
 import storeCarrinho from '../assets/img/projetos/GabrielStore/meuCarrinho.png';
@@ -33,6 +36,15 @@ import storeCadastroColaboradores from '../assets/img/projetos/GabrielStore/cada
 import storeColaboradores from '../assets/img/projetos/GabrielStore/colaboradores.png';
 import storeMinhasVendas from '../assets/img/projetos/GabrielStore/minhasVendas.png';
 import storeRegistro from '../assets/img/projetos/GabrielStore/registro.png';
+
+import marcenariaCover from '../assets/img/projetos/MarcenariaApolinario/home.png';
+import marcenariaLogo from '../assets/img/projetos/MarcenariaApolinario/logo.svg';
+import marcenariaChamadaPraCompra from '../assets/img/projetos/MarcenariaApolinario/chamadaPraCompra.png';
+import marcenariaFalePeloWhatsApp from '../assets/img/projetos/MarcenariaApolinario/FalePeloWhatsApp.png';
+import marcenariaRedesSociais from '../assets/img/projetos/MarcenariaApolinario/RedesSociais.png';
+import marcenariaServicoPrincipal from '../assets/img/projetos/MarcenariaApolinario/servicoPrincipal.png';
+import marcenariaServicos from '../assets/img/projetos/MarcenariaApolinario/Servicos.png';
+import marcenariaSobre from '../assets/img/projetos/MarcenariaApolinario/sobre.png';
 
 export const projects = [
   {
@@ -44,6 +56,7 @@ export const projects = [
       'A GeniAll é uma plataforma edtech pensada para manter alunos engajados e para facilitar a rotina de professores. Criamos jornadas mobile-first com quizzes, biblioteca multimídia e desafios colaborativos que aumentam a retenção e simplificam a gestão de turmas.',
     coverImage: geniallCover,
     carouselImage: geniallCover,
+    logo: geniallLogo,
     tags: ['EdTech', 'Mobile-first', 'Gamificação'],
     challenge:
       'Entregar uma experiência digital que combinasse aprendizado rápido, colaboração e monitoramento em tempo real, sem sacrificar a facilidade de uso para professores e alunos.',
@@ -74,6 +87,7 @@ export const projects = [
       'Skillo nasceu para aproximar comunidade acadêmica e mercado. Criamos experiências colaborativas, dashboards de progresso e módulos de prática para que cada aluno tenha visibilidade das próximas oportunidades.',
     coverImage: skilloCover,
     carouselImage: skilloCover,
+    logo: skilloLogo,
     tags: ['Comunidade', 'Conteúdo ao vivo', 'Dados'],
     challenge:
       'Construir um hub único que juntasse aulas ao vivo, mentorias, biblioteca de vídeos e ferramentas de networking sem gerar fricção na navegação.',
@@ -109,6 +123,7 @@ export const projects = [
       'Projeto de e-commerce com foco em gestão de produtos, pedidos e colaboradores. O painel foi desenhado para que a operação acompanhe o crescimento da loja sem perder controle de estoque, vendas e atendimento.',
     coverImage: storeCover,
     carouselImage: storeCover,
+    logo: storeLogo,
     tags: ['E-commerce', 'Gestão', 'Operação'],
     challenge:
       'Centralizar gestão de produtos, pedidos e equipe em uma interface simples para operação diária.',
@@ -129,6 +144,36 @@ export const projects = [
       { src: storeCadastroColaboradores, alt: 'Cadastro de colaboradores com permissões' },
       { src: storeColaboradores, alt: 'Lista de colaboradores e times' },
       { src: storeMinhasVendas, alt: 'Painel de vendas e indicadores de performance' },
+    ],
+  },
+  {
+    id: 4,
+    slug: 'marcenaria-apolinario',
+    title: 'Marcenaria Apolinario',
+    description: 'Site institucional para marcenaria com foco em conversão e contato direto.',
+    longDescription:
+      'Site desenvolvido para a Marcenaria Apolinario com design moderno e foco na experiência do cliente. Criamos uma interface que destaca os serviços, facilita o contato via WhatsApp e apresenta o portfólio de forma visual e atrativa, aumentando a conversão de visitantes em clientes.',
+    coverImage: marcenariaCover,
+    carouselImage: marcenariaCover,
+    logo: marcenariaLogo,
+    tags: ['Site Institucional', 'Conversão', 'WhatsApp'],
+    challenge:
+      'Criar uma presença digital profissional que transmitisse qualidade e confiança, facilitando o contato direto com potenciais clientes e destacando os serviços oferecidos pela marcenaria.',
+    solution:
+      'Desenvolvemos um site responsivo com seções bem definidas: home impactante, apresentação dos serviços, sobre a empresa e integração direta com WhatsApp. O design prioriza a navegação intuitiva e call-to-actions claros para conversão.',
+    results: [
+      'Aumento no número de contatos via WhatsApp com botões estratégicos.',
+      'Apresentação profissional dos serviços aumenta a confiança dos clientes.',
+      'Site responsivo funciona perfeitamente em todos os dispositivos.',
+    ],
+    gallery: [
+      { src: marcenariaCover, alt: 'Página inicial com apresentação da marcenaria' },
+      { src: marcenariaServicoPrincipal, alt: 'Destaque do serviço principal oferecido' },
+      { src: marcenariaServicos, alt: 'Catálogo completo de serviços da marcenaria' },
+      { src: marcenariaSobre, alt: 'Sobre a empresa e história da marcenaria' },
+      { src: marcenariaChamadaPraCompra, alt: 'Call-to-action para solicitar orçamento' },
+      { src: marcenariaFalePeloWhatsApp, alt: 'Integração direta com WhatsApp para contato' },
+      { src: marcenariaRedesSociais, alt: 'Links para redes sociais e contato' },
     ],
   },
 ];

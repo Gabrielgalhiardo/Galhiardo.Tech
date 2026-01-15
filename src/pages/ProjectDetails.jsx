@@ -38,6 +38,7 @@ const ProjectDetails = () => {
     description,
     longDescription,
     coverImage,
+    logo,
     tags = [],
     challenge,
     solution,
@@ -107,8 +108,10 @@ const ProjectDetails = () => {
             ))}
           </div>
         </div>
-        <div className="project-details__hero-media">
-          <img src={coverImage} alt={`Capa do projeto ${title}`} />
+        <div 
+          className="project-details__hero-media"
+          style={logo ? { backgroundImage: `url(${logo})` } : {}}
+        >
         </div>
       </section>
 
