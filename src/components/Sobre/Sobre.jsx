@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Target, Shield, Gem, Rocket } from 'lucide-react';
 import './Sobre.css';
 import Section from '../Section/Section';
 import Button from '../Button/Button';
@@ -77,22 +78,22 @@ const Sobre = () => {
 
   const valores = [
     {
-      icon: '🎯',
+      icon: Target,
       title: 'Foco em Vendas',
       description: 'Não fazemos apenas "arte". Criamos ferramentas digitais focadas em trazer retorno financeiro.'
     },
     {
-      icon: '🛡️', // Mudei para escudo (segurança) que vende muito bem
+      icon: Shield,
       title: 'Segurança e Solidez',
       description: 'Seu site construído com código limpo e seguro, sem gambiarras que dão problema no futuro.'
     },
     {
-      icon: '💎',
+      icon: Gem,
       title: 'Acabamento Premium',
       description: 'Design moderno e responsivo que passa credibilidade imediata para o seu cliente.'
     },
     {
-      icon: '🚀',
+      icon: Rocket,
       title: 'Velocidade Real',
       description: 'Otimização avançada para carregar instantaneamente em qualquer celular (4G ou Wi-Fi).'
     }
@@ -154,13 +155,18 @@ const Sobre = () => {
       <div className="sobre__valores" ref={sobreRef}>
         <h3 className="sobre__valores-title">Nossos Diferenciais</h3>
         <div className="sobre__valores-grid">
-          {valores.map((valor, index) => (
-            <div key={index} className="valor-card">
-              <div className="valor-card__icon">{valor.icon}</div>
-              <h4 className="valor-card__title">{valor.title}</h4>
-              <p className="valor-card__description">{valor.description}</p>
-            </div>
-          ))}
+          {valores.map((valor, index) => {
+            const IconComponent = valor.icon;
+            return (
+              <div key={index} className="valor-card">
+                <div className="valor-card__icon">
+                  <IconComponent size={48} />
+                </div>
+                <h4 className="valor-card__title">{valor.title}</h4>
+                <p className="valor-card__description">{valor.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Section>

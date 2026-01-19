@@ -1,11 +1,9 @@
 import { useState } from 'react';
+import { Mail, Phone, MessageCircle } from 'lucide-react';
 import './Contato.css';
 import Section from '../Section/Section';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
-import iconEmail from '../../assets/img/icons/message-regular.svg';
-import iconPhone from '../../assets/img/icons/telephone.svg';
-import iconWhatsApp from '../../assets/img/icons/whatsapp-brands-solid.svg';
 
 const Contato = () => {
   const [formData, setFormData] = useState({
@@ -88,19 +86,19 @@ const Contato = () => {
 
   const contatoInfo = [
     {
-      icon: iconEmail,
+      icon: Mail,
       title: 'Email',
       content: 'galhiardoTech@gmail.com',
       link: 'mailto:galhiardoTech@gmail.com'
     },
     {
-      icon: iconPhone,
+      icon: Phone,
       title: 'Telefone',
       content: '+55 (11) 95086-9006',
       link: 'tel:+5511950869006'
     },
     {
-      icon: iconWhatsApp,
+      icon: MessageCircle,
       title: 'WhatsApp',
       content: '+55 (11) 95086-9006',
       link: `https://wa.me/5511950869006?text=${encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech.')}`
@@ -212,7 +210,7 @@ const Contato = () => {
                 size="lg"
                 className="contato__submit"
               >
-                <span className="contato__submit-icon">💬</span>
+                <MessageCircle size={20} className="contato__submit-icon" />
                 Enviar pelo WhatsApp
               </Button>
             </form>
@@ -227,23 +225,26 @@ const Contato = () => {
             </p>
 
             <div className="contato__info-list">
-              {contatoInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.link}
-                  className="contato__info-item"
-                  target={info.link.startsWith('http') ? '_blank' : undefined}
-                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >
-                  <div className="contato__info-icon">
-                    <img src={info.icon} alt={info.title} />
-                  </div>
-                  <div className="contato__info-content">
-                    <div className="contato__info-label">{info.title}</div>
-                    <div className="contato__info-value">{info.content}</div>
-                  </div>
-                </a>
-              ))}
+              {contatoInfo.map((info, index) => {
+                const IconComponent = info.icon;
+                return (
+                  <a
+                    key={index}
+                    href={info.link}
+                    className="contato__info-item"
+                    target={info.link.startsWith('http') ? '_blank' : undefined}
+                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
+                    <div className="contato__info-icon">
+                      <IconComponent size={24} />
+                    </div>
+                    <div className="contato__info-content">
+                      <div className="contato__info-label">{info.title}</div>
+                      <div className="contato__info-value">{info.content}</div>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </Card>
         </div>

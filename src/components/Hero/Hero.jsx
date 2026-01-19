@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Rocket, Gem, TrendingUp, Handshake } from 'lucide-react';
 import './Hero.css';
 import Button from '../Button/Button';
 import Section from '../Section/Section';
@@ -68,22 +69,30 @@ const Hero = () => {
         <div className="hero__visual animate-slide-in-right">
           <div className="hero__card-grid">
             <div className="hero__card hero__card--1">
-              <div className="hero__card-icon">🚀</div>
+              <div className="hero__card-icon">
+                <Rocket size={32} />
+              </div>
               <h3>Velocidade</h3>
               <p>Seu site abrindo instantaneamente</p>
             </div>
             <div className="hero__card hero__card--2">
-              <div className="hero__card-icon">💎</div>
+              <div className="hero__card-icon">
+                <Gem size={32} />
+              </div>
               <h3>Design Premium</h3>
               <p>Visual que passa confiança</p>
             </div>
             <div className="hero__card hero__card--3">
-              <div className="hero__card-icon">📈</div>
+              <div className="hero__card-icon">
+                <TrendingUp size={32} />
+              </div>
               <h3>Mais Vendas</h3>
               <p>Foco total em conversão</p>
             </div>
             <div className="hero__card hero__card--4">
-              <div className="hero__card-icon">🤝</div>
+              <div className="hero__card-icon">
+                <Handshake size={32} />
+              </div>
               <h3>Suporte Real</h3>
               <p>Você nunca fica na mão</p>
             </div>

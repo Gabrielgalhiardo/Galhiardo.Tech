@@ -111,11 +111,18 @@
 }
 
 .hero__card-icon {
-  font-size: 2.5rem;
   margin-bottom: var(--spacing-sm);
   transition: transform var(--transition-base);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transform-origin: center;
+  color: var(--color-primary);
+}
+
+.hero__card-icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .hero__card:hover .hero__card-icon {

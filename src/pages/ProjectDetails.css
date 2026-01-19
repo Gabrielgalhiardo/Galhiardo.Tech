@@ -188,9 +188,11 @@
 }
 
 .project-gallery__zoom-icon {
-  font-size: 2rem;
   color: white;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
 }
 
 .project-gallery__grid figcaption {

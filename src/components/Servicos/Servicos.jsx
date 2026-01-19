@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Building2, DollarSign, Settings, Search, Smartphone, Shield, Check } from 'lucide-react';
 import './Servicos.css';
 import Section from '../Section/Section';
 import Card from '../Card/Card';
@@ -37,37 +38,37 @@ const Servicos = () => {
   // MUDANÇA PRINCIPAL: Textos focados em BENEFÍCIO e SOLUÇÃO
   const servicos = [
     {
-      icon: '🏢',
+      icon: Building2,
       title: 'Sites Institucionais',
       description: 'A vitrine digital da sua empresa. Transmita autoridade e confiança imediata para quem pesquisa sobre você no Google.',
       features: ['Design Premium e Exclusivo', 'Carrega rápido no 4G', 'Painel fácil de editar']
     },
     {
-      icon: '💰',
+      icon: DollarSign,
       title: 'Páginas de Venda',
       description: 'Landing Pages focadas em uma única coisa: transformar visitantes em clientes pagantes. Ideal para lançamentos e anúncios.',
       features: ['Alta taxa de conversão', 'Integração com WhatsApp', 'Rastreamento de acessos']
     },
     {
-      icon: '⚙️',
+      icon: Settings,
       title: 'Sistemas Sob Medida',
       description: 'Sua empresa ainda usa planilhas manuais? Criamos sistemas para automatizar seu estoque, agenda e gestão financeira.',
       features: ['Fim da papelada', 'Acesso de qualquer lugar', 'Relatórios automáticos']
     },
     {
-      icon: '🔎',
+      icon: Search,
       title: 'Otimização Google (SEO)',
       description: 'Não adianta ter site se ninguém te acha. Ajustamos seu posicionamento para você aparecer nas buscas da sua cidade.',
       features: ['Apareça no Google Maps', 'Melhoria de Ranking', 'Textos estratégicos']
     },
     {
-      icon: '📱',
+      icon: Smartphone,
       title: 'Aplicativos Web (PWA)',
       description: 'Sistemas que funcionam como aplicativos de celular, sem precisar baixar nada na loja. Modernidade para seu cliente.',
       features: ['Design responsivo', 'Instalável no celular', 'Custo menor que App nativo']
     },
     {
-      icon: '🛡️',
+      icon: Shield,
       title: 'Suporte & Evolução',
       description: 'Não te abandonamos após a entrega. Mantemos seu site seguro, atualizado e funcionando 24 horas por dia.',
       features: ['Backups diários', 'Proteção contra vírus', 'Atendimento rápido']
@@ -85,21 +86,28 @@ const Servicos = () => {
       </div>
 
       <div className="servicos__grid" ref={servicosRef}>
-        {servicos.map((servico, index) => (
-          <Card key={index} variant="elevated" hover className="servico-card">
-            <div className="servico-card__icon">{servico.icon}</div>
-            <h3 className="servico-card__title">{servico.title}</h3>
-            <p className="servico-card__description">{servico.description}</p>
-            <ul className="servico-card__features">
-              {servico.features.map((feature, idx) => (
-                <li key={idx}>
-                  <span className="servico-card__check">✓</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </Card>
-        ))}
+        {servicos.map((servico, index) => {
+          const IconComponent = servico.icon;
+          return (
+            <Card key={index} variant="elevated" hover className="servico-card">
+              <div className="servico-card__icon">
+                <IconComponent size={32} />
+              </div>
+              <h3 className="servico-card__title">{servico.title}</h3>
+              <p className="servico-card__description">{servico.description}</p>
+              <ul className="servico-card__features">
+                {servico.features.map((feature, idx) => (
+                  <li key={idx}>
+                    <span className="servico-card__check">
+                      <Check size={16} />
+                    </span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          );
+        })}
       </div>
     </Section>
   );

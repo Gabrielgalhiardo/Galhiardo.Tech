@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import SEO from '../components/SEO/SEO';
 import { getProjectBySlug } from '../data/projects';
 import './ProjectDetails.css';
@@ -163,7 +164,7 @@ const ProjectDetails = () => {
               <img src={item.src} alt={item.alt} />
               <figcaption>{item.alt}</figcaption>
               <div className="project-gallery__overlay">
-                <span className="project-gallery__zoom-icon">🔍</span>
+                <Search className="project-gallery__zoom-icon" size={32} />
               </div>
             </figure>
           ))}
@@ -177,7 +178,7 @@ const ProjectDetails = () => {
             onClick={closeLightbox}
             aria-label="Fechar visualização"
           >
-            ✕
+            <X size={24} />
           </button>
           <button 
             className="lightbox__nav lightbox__nav--prev"
@@ -187,7 +188,7 @@ const ProjectDetails = () => {
             }}
             aria-label="Imagem anterior"
           >
-            ‹
+            <ChevronLeft size={32} />
           </button>
           <button 
             className="lightbox__nav lightbox__nav--next"
@@ -197,7 +198,7 @@ const ProjectDetails = () => {
             }}
             aria-label="Próxima imagem"
           >
-            ›
+            <ChevronRight size={32} />
           </button>
           <div className="lightbox__content" onClick={(e) => e.stopPropagation()}>
             <img 

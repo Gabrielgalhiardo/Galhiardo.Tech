@@ -64,9 +64,9 @@
     padding: var(--spacing-lg);
   }
   
-  .servico-card__icon {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-sm);
+  .servico-card__icon svg {
+    width: 28px;
+    height: 28px;
   }
   
   .servico-card__title {
@@ -79,11 +79,18 @@
 }
 
 .servico-card__icon {
-  font-size: 3rem;
   margin-bottom: var(--spacing-md);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform var(--transition-base);
   transform-origin: center;
+  color: var(--color-primary);
+}
+
+.servico-card__icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .servico-card:hover .servico-card__icon {
@@ -119,10 +126,15 @@
 
 .servico-card__check {
   color: var(--color-accent);
-  font-weight: bold;
-  font-size: 1.125rem;
   transition: transform var(--transition-fast);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.servico-card__check svg {
+  width: 16px;
+  height: 16px;
 }
 
 .servico-card__features li:hover .servico-card__check {

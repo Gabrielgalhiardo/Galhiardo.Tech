@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 import './Depoimentos.css';
 import Section from '../Section/Section';
 import Card from '../Card/Card';
@@ -9,35 +10,38 @@ const Depoimentos = () => {
   const depoimentos = [
     {
       nome: 'Luam Meira',
-      cargo: 'Ceo, Empresário',
+      cargo: 'CEO',
       empresa: 'TechStart',
       foto: fotoEmpreendedor,
-      texto: 'A Galhiardo.tech transformou completamente nossa infraestrutura. Em 3 meses, reduzimos custos em 40% e aumentamos a performance em 200%. Profissionais excepcionais!',
+      texto: 'Contratei a Galhiardo.tech para fazer o site da minha empresa. O que mais me impressionou foi a velocidade - em menos de uma semana já estava no ar. E o melhor: funciona perfeitamente no celular. Meus clientes conseguem acessar de qualquer lugar.',
       rating: 5
     },
     {
       nome: 'Milton Apolinário',
-      cargo: 'Ceo da empresa',
-      empresa: 'Marcenaria',
+      cargo: 'Proprietário',
+      empresa: 'Marcenaria Apolinário',
       foto: fotoMarcenaria,
-      texto: 'Trabalhar com a Galhiardo.tech foi uma experiência única. Eles não apenas entregam código, mas estratégia e resultados. Nossa transformação digital foi um sucesso total.',
+      texto: 'Eu não entendo muito de tecnologia, mas o Gabriel explicou tudo de forma simples. O site ficou exatamente como eu queria e agora recebo muito mais orçamentos pelo WhatsApp. Valeu cada centavo investido.',
       rating: 5
     },
     {
       nome: 'Robson Galhiardo',
-      cargo: 'Ceo da empresa',
-      empresa: 'Imobiliária',
+      cargo: 'Diretor',
+      empresa: 'Imobiliária Galhiardo',
       foto: fotoImobiliaria,
-      texto: 'Consultoria de altíssimo nível. A equipe entendeu perfeitamente nossas necessidades e entregou soluções que superaram nossas expectativas. Recomendo sem hesitação!',
+      texto: 'Precisávamos de um sistema para gerenciar nossos imóveis. A Galhiardo.tech criou uma solução que facilitou muito nosso dia a dia. Antes era tudo em planilha, agora está tudo organizado e acessível de qualquer lugar.',
       rating: 5
     }
   ];
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={`star ${i < rating ? 'star--filled' : ''}`}>
-        ★
-      </span>
+      <Star 
+        key={i} 
+        className={`star ${i < rating ? 'star--filled' : ''}`}
+        size={20}
+        fill={i < rating ? 'currentColor' : 'none'}
+      />
     ));
   };
 
@@ -53,10 +57,11 @@ const Depoimentos = () => {
       <div className="depoimentos__grid">
         {depoimentos.map((depoimento, index) => (
           <Card key={index} variant="elevated" hover className="depoimento-card">
+            <div className="depoimento-card__quote-icon">"</div>
             <div className="depoimento-card__rating">
               {renderStars(depoimento.rating)}
             </div>
-            <p className="depoimento-card__text">"{depoimento.texto}"</p>
+            <p className="depoimento-card__text">{depoimento.texto}</p>
             <div className="depoimento-card__author">
               <div className="depoimento-card__avatar">
                 <img src={depoimento.foto} alt={depoimento.nome} />
