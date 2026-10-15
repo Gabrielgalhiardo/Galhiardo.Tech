@@ -2,16 +2,16 @@ import { Star } from 'lucide-react';
 import './Depoimentos.css';
 import Section from '../Section/Section';
 import Card from '../Card/Card';
-import fotoEmpreendedor from '../../assets/img/pessoasDepoimento/empredendor.jpg';
+import fotoEmpreendedor from '../../assets/img/pessoasDepoimento/empreendedor.png';
 import fotoMarcenaria from '../../assets/img/pessoasDepoimento/marcenaria.png';
 import fotoImobiliaria from '../../assets/img/pessoasDepoimento/imobiliaria.png';
 
 const Depoimentos = () => {
   const depoimentos = [
     {
-      nome: 'Luam Meira',
+      nome: 'Anderson Farina',
       cargo: 'CEO',
-      empresa: 'TechStart',
+      empresa: 'Construções Farina',
       foto: fotoEmpreendedor,
       texto: 'Contratei a Galhiardo.tech para fazer o site da minha empresa. O que mais me impressionou foi a velocidade - em menos de uma semana já estava no ar. E o melhor: funciona perfeitamente no celular. Meus clientes conseguem acessar de qualquer lugar.',
       rating: 5

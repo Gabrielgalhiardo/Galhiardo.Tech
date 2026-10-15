@@ -1,31 +1,21 @@
-// --- IMPORTAÇÕES: GENIALL ---
-import geniallCover from '../assets/img/projetos/GeniAll/jogo.png';
-import geniallLogo from '../assets/img/projetos/GeniAll/logo.png';
-import geniallHistoria from '../assets/img/projetos/GeniAll/historia.png';
-import geniallJogo from '../assets/img/projetos/GeniAll/jogo.png';
-import geniallJogoMemoria from '../assets/img/projetos/GeniAll/jogoDaMemoria.png';
-import geniallLoja from '../assets/img/projetos/GeniAll/loja.png';
-import geniallPersonagens from '../assets/img/projetos/GeniAll/personagens.png';
-import geniallQuiz from '../assets/img/projetos/GeniAll/quiz.png';
-import geniallRegistro from '../assets/img/projetos/GeniAll/registro.png';
-import geniallVerdadeiroOuFalso from '../assets/img/projetos/GeniAll/verdadeiroOuFalso.png';
+// --- IMPORTAÇÕES: ALTEK ---
+import altekCover from '../assets/img/projetos/Altek/home.png';
+import altekLogo from '../assets/img/projetos/Altek/logo.png';
+import altekSolucoes from '../assets/img/projetos/Altek/solucoes.png';
+import altekServicos from '../assets/img/projetos/Altek/servicos.png';
+import altekSobre from '../assets/img/projetos/Altek/sobre.png';
+import altekInspiracoes from '../assets/img/projetos/Altek/inspiracoes.png';
+import altekOrcamento from '../assets/img/projetos/Altek/orcamento.png';
+import altekLocalizacao from '../assets/img/projetos/Altek/localizacao.png';
 
-// --- IMPORTAÇÕES: SKILLO ---
-import skilloCover from '../assets/img/projetos/Skillo/chamadaPraAcao.png';
-import skilloLogo from '../assets/img/projetos/Skillo/logo.png';
-import skilloAgendamentos from '../assets/img/projetos/Skillo/agendamentos.png';
-import skilloAulas from '../assets/img/projetos/Skillo/aulas.png';
-import skilloConfiguracaoPerfil from '../assets/img/projetos/Skillo/configuracaoPerfil.png';
-import skilloCriarFormulario from '../assets/img/projetos/Skillo/criarFormulario.png';
-import skilloDepoimentos from '../assets/img/projetos/Skillo/depoimentos.png';
-import skilloDesenvolverExercicio from '../assets/img/projetos/Skillo/desenvolverExercicio.png';
-import skilloFeedDeVideos from '../assets/img/projetos/Skillo/feedDeVideos.png';
-import skilloInteresses from '../assets/img/projetos/Skillo/interesses.png';
-import skilloLogin from '../assets/img/projetos/Skillo/login.png';
-import skilloPaginaInicial from '../assets/img/projetos/Skillo/paginaInicial.png';
-import skilloPerfil from '../assets/img/projetos/Skillo/perfil.png';
-import skilloRegistro from '../assets/img/projetos/Skillo/registro.png';
-import skilloTirarFoto from '../assets/img/projetos/Skillo/tirarFoto.png';
+// --- IMPORTAÇÕES: AURÉVYRA ---
+import aurevyraCover from '../assets/img/projetos/Aurevyra/home.png';
+import aurevyraLogo from '../assets/img/projetos/Aurevyra/logo.png';
+import aurevyraTratamentos from '../assets/img/projetos/Aurevyra/tratamentos.png';
+import aurevyraSobre from '../assets/img/projetos/Aurevyra/sobre.png';
+import aurevyraLocalizacao from '../assets/img/projetos/Aurevyra/localizacao.png';
+import aurevyraPerguntasFrequentes from '../assets/img/projetos/Aurevyra/perguntasFrequentes.png';
+import aurevyraContato from '../assets/img/projetos/Aurevyra/contato.png';
 
 // --- IMPORTAÇÕES: GABRIEL STORE ---
 import storeCover from '../assets/img/projetos/GabrielStore/sobre.png';
@@ -62,65 +52,57 @@ import lesttiProdutos from '../assets/img/projetos/Lestti/produtos.png';
 export const projects = [
   {
     id: 1,
-    slug: 'geniall',
-    title: 'GeniAll',
-    description: 'Plataforma educacional com trilhas gamificadas e comunidade ativa.',
+    slug: 'altek',
+    title: 'Altek',
+    description: 'Site institucional de serralheria e vidraçaria com foco em orçamentos.',
     longDescription:
-      'A GeniAll é uma plataforma edtech pensada para manter alunos engajados e facilitar a rotina de professores. Criamos jornadas mobile-first com quizzes, biblioteca multimídia e desafios colaborativos que aumentam a retenção.',
-    coverImage: geniallCover,
-    carouselImage: geniallCover,
-    logo: geniallLogo,
-    tags: ['EdTech', 'Mobile-first', 'Gamificação'],
-    challenge: 'Entregar uma experiência digital que combinasse aprendizado rápido e monitoramento em tempo real.',
-    solution: 'Fluxos simples para criação de aulas e avaliações interativas com feedback visual imediato.',
+      'Site da Altek, serralheria e vidraçaria localizada em São Mateus, São Paulo. A apresentação reúne soluções em vidro e alumínio, inspirações de aplicação e informações para solicitar um orçamento ou visitar a empresa.',
+    coverImage: altekCover,
+    carouselImage: altekCover,
+    logo: altekLogo,
+    tags: ['Site Institucional', 'Vidraçaria', 'WhatsApp'],
+    challenge: 'Apresentar a variedade de soluções em vidro e alumínio e facilitar o contato para projetos sob medida.',
+    solution: 'Catálogo visual de serviços, galeria de inspirações e chamadas para orçamento com acesso ao WhatsApp e à localização.',
     results: [
-      'Onboarding guiado reduziu dúvidas de suporte.',
-      'Gestão de aulas em minutos para professores.',
-      'Engajamento alto com trilhas gamificadas.',
+      'Soluções organizadas por tipo de aplicação.',
+      'Contato direto para solicitar orçamentos.',
+      'Endereço e mapa para encontrar a empresa.',
     ],
     gallery: [
-      { src: geniallHistoria, alt: 'Narrativa dos personagens' },
-      { src: geniallJogo, alt: 'Tela principal do jogo' },
-      { src: geniallJogoMemoria, alt: 'Jogo da memória' },
-      { src: geniallLoja, alt: 'Loja de itens colecionáveis' },
-      { src: geniallPersonagens, alt: 'Habilidades dos personagens' },
-      { src: geniallQuiz, alt: 'Quiz interativo' },
-      { src: geniallRegistro, alt: 'Fluxo de registro' },
-      { src: geniallVerdadeiroOuFalso, alt: 'Desafio verdadeiro ou falso' },
+      { src: altekCover, alt: 'Página inicial da Altek' },
+      { src: altekSolucoes, alt: 'Soluções em vidro e alumínio' },
+      { src: altekServicos, alt: 'Serviços de vidraçaria e serralheria' },
+      { src: altekSobre, alt: 'Sobre a Altek em São Mateus' },
+      { src: altekInspiracoes, alt: 'Galeria de inspirações para ambientes' },
+      { src: altekOrcamento, alt: 'Chamada para orçamento e localização' },
+      { src: altekLocalizacao, alt: 'Mapa de localização e canais de contato' },
     ],
   },
   {
     id: 2,
-    slug: 'skillo',
-    title: 'Skillo',
-    description: 'Ecossistema para conectar alunos, mentores e empresas.',
+    slug: 'aurevyra',
+    title: 'Aurévyra',
+    description: 'Site de estética e bem-estar com apresentação de tratamentos faciais.',
     longDescription:
-      'Skillo aproxima a comunidade acadêmica do mercado através de mentorias e conteúdo ao vivo. Criamos dashboards de progresso e módulos práticos para visibilidade de carreiras.',
-    coverImage: skilloCover,
-    carouselImage: skilloCover,
-    logo: skilloLogo,
-    tags: ['Comunidade', 'Conteúdo ao vivo', 'Dados'],
-    challenge: 'Construir um hub único para aulas ao vivo e networking sem fricção.',
-    solution: 'Mapeamento de jornada com filtros rápidos e feed personalizado de vídeos.',
+      'Site da Aurévyra, marca de estética e bem-estar voltada ao cuidado facial. O projeto apresenta tratamentos, a proposta de atendimento e o espaço, com perguntas frequentes e contato pelo WhatsApp para agendar uma avaliação.',
+    coverImage: aurevyraCover,
+    carouselImage: aurevyraCover,
+    logo: aurevyraLogo,
+    tags: ['Estética', 'Bem-estar', 'Site Institucional'],
+    challenge: 'Traduzir a proposta acolhedora da marca em uma experiência digital que apresente os cuidados e facilite o primeiro contato.',
+    solution: 'Identidade visual suave, apresentação dos tratamentos e informações de atendimento com chamadas para agendar uma avaliação.',
     results: [
-      'Discovery de conteúdo em poucos cliques.',
-      'Agendamento automático para mentores.',
-      'Perfis completos com interesses específicos.',
+      'Tratamentos faciais apresentados de forma clara.',
+      'Dúvidas frequentes reunidas antes do atendimento.',
+      'Acesso ao WhatsApp para agendar uma avaliação.',
     ],
     gallery: [
-      { src: skilloPaginaInicial, alt: 'Página inicial e calendário' },
-      { src: skilloAgendamentos, alt: 'Gestão de agendamentos' },
-      { src: skilloAulas, alt: 'Catálogo de aulas' },
-      { src: skilloConfiguracaoPerfil, alt: 'Configuração de perfil' },
-      { src: skilloCriarFormulario, alt: 'Criação de formulários' },
-      { src: skilloDepoimentos, alt: 'Depoimentos da comunidade' },
-      { src: skilloDesenvolverExercicio, alt: 'Editor de exercícios' },
-      { src: skilloFeedDeVideos, alt: 'Feed de vídeos' },
-      { src: skilloInteresses, alt: 'Personalização de interesses' },
-      { src: skilloLogin, alt: 'Tela de login' },
-      { src: skilloPerfil, alt: 'Perfil do estudante' },
-      { src: skilloRegistro, alt: 'Fluxo de registro' },
-      { src: skilloTirarFoto, alt: 'Captura de tarefas' },
+      { src: aurevyraCover, alt: 'Página inicial da Aurévyra' },
+      { src: aurevyraTratamentos, alt: 'Limpeza de pele e tratamentos faciais' },
+      { src: aurevyraSobre, alt: 'Proposta de cuidado e atendimento da Aurévyra' },
+      { src: aurevyraLocalizacao, alt: 'Espaço e localização da clínica' },
+      { src: aurevyraPerguntasFrequentes, alt: 'Perguntas frequentes sobre o atendimento' },
+      { src: aurevyraContato, alt: 'Contato para agendar uma avaliação' },
     ],
   },
   {
