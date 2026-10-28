@@ -2,6 +2,14 @@
 
 Site profissional de consultoria em tecnologia desenvolvido com React, Vite e as melhores práticas de UX/UI Design.
 
+## Idiomas
+
+- Português: `/` e `/projetos/:slug`.
+- Inglês: `/en` e `/en/projects/:slug`.
+- O seletor English / Português no menu mantém o projeto e a seção atual. O idioma é definido pela URL e permanece ao atualizar ou compartilhar a página.
+- As traduções ficam em `src/i18n/translations.js`; o texto original em português é usado como chave e fallback. Nomes de empresas e capturas de tela dos projetos são preservados.
+- Para visualizar: `npm run dev`. Para gerar a versão de produção: `npm run build`. A hospedagem deve direcionar as rotas do site para `index.html`, como já necessário para os detalhes dos projetos.
+
 ### 1. Azul Royal (Cor Primária)
 **Código Hex:** `#2563EB`
 

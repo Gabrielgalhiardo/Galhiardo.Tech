@@ -1,3 +1,4 @@
+import { useLanguage } from './i18n/LanguageContext';
 import React, { useEffect } from 'react';
 import './App.css';
 
@@ -11,6 +12,7 @@ import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 
 function App() {
+  const { t } = useLanguage();
   useEffect(() => {
     // Desabilitar arrastar em todas as imagens
     const disableImageDrag = () => {
@@ -42,8 +44,8 @@ function App() {
   return (
     <div className="app">
       <SEO
-        title="Criação de Sites e Consultoria Web"
-        description="Transforme seu negócio com soluções digitais de alta performance. Consultoria em tecnologia, desenvolvimento web, arquitetura de software e transformação digital. Resultados mensuráveis e ROI comprovado. Solicite seu orçamento grátis!"
+        title={t("Criação de Sites e Consultoria Web")}
+        description={t("Transforme seu negócio com soluções digitais de alta performance. Consultoria em tecnologia, desenvolvimento web, arquitetura de software e transformação digital. Resultados mensuráveis e ROI comprovado. Solicite seu orçamento grátis!")}
         image="/og-image.jpg"
       />
 
@@ -52,7 +54,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/en" element={<Home />} />
         <Route path="/projetos/:slug" element={<ProjectDetails />} />
+        <Route path="/en/projects/:slug" element={<ProjectDetails />} />
       </Routes>
 
       <Footer />

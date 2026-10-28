@@ -1,4 +1,7 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../../i18n/LanguageContext';
+import { localizedPath } from '../../i18n/translations';
 
 /**
  * Componente SEO reutilizável para gerenciar meta tags e Open Graph
@@ -18,11 +21,13 @@ const SEO = ({
   type = 'website',
   siteName = 'Galhiardo.tech'
 }) => {
+  const { language, t } = useLanguage();
+  const { pathname } = useLocation();
   // URL base do site 
   const siteUrl = 'https://galhiardoTech.com.br';
   
   // URL completa da página
-  const pageUrl = url || (typeof window !== 'undefined' ? window.location.href : siteUrl);
+  const pageUrl = url || `${siteUrl}${localizedPath(pathname, language)}`;
   
   // URL completa da imagem (se for relativa, adiciona o siteUrl)
   const imageUrl = image 
@@ -32,10 +37,11 @@ const SEO = ({
   // Título completo para SEO
   const fullTitle = title 
     ? `${title} | ${siteName}`
-    : `${siteName} - Consultoria em Tecnologia`;
+    : `${siteName} - ${t('Consultoria em Tecnologia')}`;
 
   return (
-    <Helmet>
+    <Helmet defer={false}>
+      <html lang={language === 'en' ? 'en' : 'pt-BR'} />
       {/* Meta Tags Básicas */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
@@ -43,6 +49,9 @@ const SEO = ({
       
       {/* Canonical URL */}
       <link rel="canonical" href={pageUrl} />
+      <link rel="alternate" hrefLang="pt-BR" href={`${siteUrl}${localizedPath(pathname, 'pt')}`} />
+      <link rel="alternate" hrefLang="en" href={`${siteUrl}${localizedPath(pathname, 'en')}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${siteUrl}${localizedPath(pathname, 'pt')}`} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
@@ -54,7 +63,8 @@ const SEO = ({
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={title || fullTitle} />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content="pt_BR" />
+      <meta property="og:locale" content={language === 'en' ? 'en_US' : 'pt_BR'} />
+      <meta property="og:locale:alternate" content={language === 'en' ? 'pt_BR' : 'en_US'} />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -70,7 +80,7 @@ const SEO = ({
       {/* Meta Tags Adicionais para SEO */}
       <meta name="robots" content="index, follow" />
       <meta name="author" content={siteName} />
-      <meta name="language" content="Portuguese" />
+      <meta name="language" content={language === 'en' ? 'English' : 'Portuguese'} />
       <meta name="revisit-after" content="7 days" />
       
       {/* Schema.org para Rich Snippets */}
@@ -80,6 +90,7 @@ const SEO = ({
           '@type': 'ProfessionalService',
           name: siteName,
           description: description,
+          inLanguage: language === 'en' ? 'en' : 'pt-BR',
           url: siteUrl,
           logo: `${siteUrl}/logo.png`,
           image: imageUrl,

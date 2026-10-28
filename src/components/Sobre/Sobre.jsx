@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import { useEffect, useRef } from 'react';
 import { Target, Shield, Gem, Rocket } from 'lucide-react';
 import './Sobre.css';
@@ -6,6 +7,7 @@ import Button from '../Button/Button';
 import AnimatedCounter from './AnimatedCounter';
 
 const Sobre = () => {
+  const { t } = useLanguage();
   const sobreRef = useRef(null);
 
   useEffect(() => {
@@ -70,32 +72,32 @@ const Sobre = () => {
 
   // Stats com configuração para animação
   const stats = [
-    { number: '100', suffix: '%', label: 'Compromisso com Prazo', duration: 2000 },
-    { number: '24h', label: 'Sua Empresa Online', duration: 1500 },
-    { number: '3', suffix: '+', label: 'Anos de Desenvolvimento', duration: 1800 },
-    { number: 'Top', label: 'Performance Google', duration: 1000 }
+    { number: '100', suffix: '%', label: t("Compromisso com Prazo"), duration: 2000 },
+    { number: '24h', label: t("Sua Empresa Online"), duration: 1500 },
+    { number: '3', suffix: '+', label: t("Anos de Desenvolvimento"), duration: 1800 },
+    { number: 'Top', label: t("Performance Google"), duration: 1000 }
   ];
 
   const valores = [
     {
       icon: Target,
-      title: 'Foco em Vendas',
-      description: 'Não fazemos apenas "arte". Criamos ferramentas digitais focadas em trazer retorno financeiro.'
+      title: t("Foco em Vendas"),
+      description: t("Não fazemos apenas \"arte\". Criamos ferramentas digitais focadas em trazer retorno financeiro.")
     },
     {
       icon: Shield,
-      title: 'Segurança e Solidez',
-      description: 'Seu site construído com código limpo e seguro, sem gambiarras que dão problema no futuro.'
+      title: t("Segurança e Solidez"),
+      description: t("Seu site construído com código limpo e seguro, sem gambiarras que dão problema no futuro.")
     },
     {
       icon: Gem,
-      title: 'Acabamento Premium',
-      description: 'Design moderno e responsivo que passa credibilidade imediata para o seu cliente.'
+      title: t("Acabamento Premium"),
+      description: t("Design moderno e responsivo que passa credibilidade imediata para o seu cliente.")
     },
     {
       icon: Rocket,
-      title: 'Velocidade Real',
-      description: 'Otimização avançada para carregar instantaneamente em qualquer celular (4G ou Wi-Fi).'
+      title: t("Velocidade Real"),
+      description: t("Otimização avançada para carregar instantaneamente em qualquer celular (4G ou Wi-Fi).")
     }
   ];
 
@@ -104,18 +106,16 @@ const Sobre = () => {
       <div className="sobre__content">
         <div className="sobre__text">
           <h2 className="sobre__title">
-            Por que a <span className="sobre__title-highlight">Galhiardo.tech</span>?
+            {t("Por que a")} <span className="sobre__title-highlight">Galhiardo.tech</span>?
           </h2>
           
           <p className="sobre__description">
-            Muitas agências entregam apenas um visual bonito. Nós entregamos <strong>engenharia de negócios</strong>. 
-            A Galhiardo.tech nasceu para preencher a lacuna entre a programação complexa e a necessidade simples 
-            da sua empresa: <strong>vender mais e aparecer bem na internet</strong>.
+            {t("Muitas agências entregam apenas um visual bonito. Nós entregamos")} <strong>{t("engenharia de negócios")}</strong>.
+            {t('A Galhiardo.tech nasceu para preencher a lacuna entre a programação complexa e a necessidade simples da sua empresa:')}{' '}
+            <strong>{t("vender mais e aparecer bem na internet")}</strong>.
           </p>
           <p className="sobre__description">
-            Utilizamos as mesmas tecnologias de grandes startups (como React e Next.js) para criar sites e sistemas 
-            que são rápidos, seguros e, acima de tudo, fáceis para o seu cliente usar. 
-            Nós cuidamos de toda a parte técnica ("o código pesado") para que você possa focar apenas em gerenciar o seu crescimento.
+            {t("Utilizamos as mesmas tecnologias de grandes startups (como React e Next.js) para criar sites e sistemas que são rápidos, seguros e, acima de tudo, fáceis para o seu cliente usar. Nós cuidamos de toda a parte técnica (\"o código pesado\") para que você possa focar apenas em gerenciar o seu crescimento.")}
           </p>
 
           <div className="sobre__cta">
@@ -130,7 +130,7 @@ const Sobre = () => {
                 }
               }}
             >
-              Conheça Nossas Soluções
+              {t("Conheça Nossas Soluções")}
             </Button>
           </div>
         </div>
@@ -153,7 +153,7 @@ const Sobre = () => {
       </div>
 
       <div className="sobre__valores" ref={sobreRef}>
-        <h3 className="sobre__valores-title">Nossos Diferenciais</h3>
+        <h3 className="sobre__valores-title">{t("Nossos Diferenciais")}</h3>
         <div className="sobre__valores-grid">
           {valores.map((valor, index) => {
             const IconComponent = valor.icon;

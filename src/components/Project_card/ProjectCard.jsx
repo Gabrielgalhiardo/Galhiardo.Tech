@@ -1,7 +1,9 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import React from 'react';
 import './ProjectCard.css';
 
 const ProjectCard = ({ title, description, image, logo, link, onClick }) => {
+  const { t } = useLanguage();
   const handleCardClick = () => {
     if (onClick) {
       onClick();
@@ -22,14 +24,14 @@ const ProjectCard = ({ title, description, image, logo, link, onClick }) => {
           handleCardClick();
         }
       }}
-      aria-label={`Abrir projeto ${title}`}
+      aria-label={`${t('Abrir projeto')} ${title}`}
     >
       <div 
         className="card-image-container"
         style={logo ? { backgroundImage: `url(${logo})` } : {}}
       >
         <div className="click-overlay">
-          <span>Ver Projeto ➜</span>
+          <span>{t("Ver Projeto ➜")}</span>
         </div>
       </div>
       

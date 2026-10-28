@@ -35,7 +35,7 @@
   position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
   .navbar__container {
     padding: 0 var(--spacing-md);
     height: 80px;
@@ -67,7 +67,7 @@
 }
 
 /* Desktop - Logo com nome maior */
-@media (min-width: 769px) {
+@media (min-width: 1181px) {
   .navbar__logo {
     height: 80px;
   }
@@ -82,7 +82,7 @@
 }
 
 /* Mobile - Mostra logo sem nome (menor) */
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
   .navbar__logo {
     height: 50px;
   }
@@ -261,7 +261,7 @@
 }
 
 /* ========== MOBILE STYLES ========== */
-@media (max-width: 768px) {
+@media (max-width: 1180px) {
   .navbar__toggle {
     display: flex;
   }
@@ -333,7 +333,7 @@
 }
 
 /* ========== DESKTOP STYLES ========== */
-@media (min-width: 769px) {
+@media (min-width: 1181px) {
   .navbar__toggle {
     display: none !important;
   }
@@ -369,4 +369,19 @@
     font-size: 1rem;
     min-width: 180px;
   }
+}
+
+/* Language choice stays available in desktop and mobile navigation. */
+.navbar__language a {
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.65rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+.navbar__language a::after { display: none; }
+@media (min-width: 1181px) {
+  .navbar__menu { gap: 1rem; }
+  .navbar__menu a { white-space: nowrap; }
+  .navbar__cta { margin-left: 0; }
 }

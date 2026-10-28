@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import { useEffect, useRef } from 'react';
 import { Building2, DollarSign, Settings, Search, Smartphone, Shield, Check } from 'lucide-react';
 import './Servicos.css';
@@ -5,6 +6,7 @@ import Section from '../Section/Section';
 import Card from '../Card/Card';
 
 const Servicos = () => {
+  const { t } = useLanguage();
   const servicosRef = useRef(null);
 
   useEffect(() => {
@@ -39,49 +41,48 @@ const Servicos = () => {
   const servicos = [
     {
       icon: Building2,
-      title: 'Sites Institucionais',
-      description: 'A vitrine digital da sua empresa. Transmita autoridade e confiança imediata para quem pesquisa sobre você no Google.',
-      features: ['Design Premium e Exclusivo', 'Carrega rápido no 4G', 'Painel fácil de editar']
+      title: t("Sites Institucionais"),
+      description: t("A vitrine digital da sua empresa. Transmita autoridade e confiança imediata para quem pesquisa sobre você no Google."),
+      features: [t("Design Premium e Exclusivo"), t("Carrega rápido no 4G"), t("Painel fácil de editar")]
     },
     {
       icon: DollarSign,
-      title: 'Páginas de Venda',
-      description: 'Landing Pages focadas em uma única coisa: transformar visitantes em clientes pagantes. Ideal para lançamentos e anúncios.',
-      features: ['Alta taxa de conversão', 'Integração com WhatsApp', 'Rastreamento de acessos']
+      title: t("Páginas de Venda"),
+      description: t("Landing Pages focadas em uma única coisa: transformar visitantes em clientes pagantes. Ideal para lançamentos e anúncios."),
+      features: [t("Alta taxa de conversão"), t("Integração com WhatsApp"), t("Rastreamento de acessos")]
     },
     {
       icon: Settings,
-      title: 'Sistemas Sob Medida',
-      description: 'Sua empresa ainda usa planilhas manuais? Criamos sistemas para automatizar seu estoque, agenda e gestão financeira.',
-      features: ['Fim da papelada', 'Acesso de qualquer lugar', 'Relatórios automáticos']
+      title: t("Sistemas Sob Medida"),
+      description: t("Sua empresa ainda usa planilhas manuais? Criamos sistemas para automatizar seu estoque, agenda e gestão financeira."),
+      features: [t("Fim da papelada"), t("Acesso de qualquer lugar"), t("Relatórios automáticos")]
     },
     {
       icon: Search,
-      title: 'Otimização Google (SEO)',
-      description: 'Não adianta ter site se ninguém te acha. Ajustamos seu posicionamento para você aparecer nas buscas da sua cidade.',
-      features: ['Apareça no Google Maps', 'Melhoria de Ranking', 'Textos estratégicos']
+      title: t("Otimização Google (SEO)"),
+      description: t("Não adianta ter site se ninguém te acha. Ajustamos seu posicionamento para você aparecer nas buscas da sua cidade."),
+      features: [t("Apareça no Google Maps"), t("Melhoria de Ranking"), t("Textos estratégicos")]
     },
     {
       icon: Smartphone,
-      title: 'Aplicativos Web (PWA)',
-      description: 'Sistemas que funcionam como aplicativos de celular, sem precisar baixar nada na loja. Modernidade para seu cliente.',
-      features: ['Design responsivo', 'Instalável no celular', 'Custo menor que App nativo']
+      title: t("Aplicativos Web (PWA)"),
+      description: t("Sistemas que funcionam como aplicativos de celular, sem precisar baixar nada na loja. Modernidade para seu cliente."),
+      features: [t("Design responsivo"), t("Instalável no celular"), t("Custo menor que App nativo")]
     },
     {
       icon: Shield,
-      title: 'Suporte & Evolução',
-      description: 'Não te abandonamos após a entrega. Mantemos seu site seguro, atualizado e funcionando 24 horas por dia.',
-      features: ['Backups diários', 'Proteção contra vírus', 'Atendimento rápido']
+      title: t("Suporte & Evolução"),
+      description: t("Não te abandonamos após a entrega. Mantemos seu site seguro, atualizado e funcionando 24 horas por dia."),
+      features: [t("Backups diários"), t("Proteção contra vírus"), t("Atendimento rápido")]
     }
   ];
 
   return (
     <Section id="servicos" variant="ice" className="servicos">
       <div className="servicos__header">
-        <h2 className="servicos__title">Como podemos ajudar?</h2>
+        <h2 className="servicos__title">{t("Como podemos ajudar?")}</h2>
         <p className="servicos__subtitle">
-          Da criação do seu site até a automatização da sua empresa. 
-          Tecnologia descomplicada para gerar lucro.
+          {t("Da criação do seu site até a automatização da sua empresa. Tecnologia descomplicada para gerar lucro.")}
         </p>
       </div>
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../Project_card/ProjectCard';
-import { projects } from '../../data/projects';
+import { getProjects } from '../../data/projects';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './ProjectCarousel.css';
 
 const ProjectCarousel = () => {
+  const { language, path, t } = useLanguage();
+  const projects = getProjects(language);
   const [active, setActive] = useState(0);
   const timeoutRef = useRef(null);
   const navigate = useNavigate();
@@ -25,7 +28,7 @@ const ProjectCarousel = () => {
   const nextSlide = () => setActive(active + 1);
   const prevSlide = () => setActive(active - 1);
 
-  const handleOpenProject = (slug) => navigate(`/projetos/${slug}`);
+  const handleOpenProject = (slug) => navigate(path(`/projetos/${slug}`));
 
   // --- CONFIGURAÇÃO VISUAL 3D ---
   const getStyles = (offset) => {
@@ -55,7 +58,7 @@ const ProjectCarousel = () => {
 
   return (
     <div className="carousel-container">
-      <button className="nav-button prev" onClick={prevSlide}>&#8249;</button>
+      <button className="nav-button prev" onClick={prevSlide} aria-label={t('Projeto anterior')}>&#8249;</button>
       
       <div className="carousel-track">
         {/* Renderiza APENAS 3 cartões: -1 (Anterior), 0 (Atual), 1 (Próximo) */}
@@ -81,7 +84,7 @@ const ProjectCarousel = () => {
         })}
       </div>
 
-      <button className="nav-button next" onClick={nextSlide}>&#8250;</button>
+      <button className="nav-button next" onClick={nextSlide} aria-label={t('Próximo projeto')}>&#8250;</button>
     </div>
   );
 };

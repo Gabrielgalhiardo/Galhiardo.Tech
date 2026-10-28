@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.jsx'
+import { LanguageProvider } from './i18n/LanguageContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <HelmetProvider>
-        <App />
+        <LanguageProvider>
+          <App />
+        </LanguageProvider>
       </HelmetProvider>
     </BrowserRouter>
   </StrictMode>,

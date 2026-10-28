@@ -1,9 +1,11 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import './WhatsAppButton.css';
 
 const WhatsAppButton = () => {
+  const { t } = useLanguage();
   // Número do WhatsApp (formato: 5511999999999 - sem espaços, com código do país)
   const phoneNumber = '5511950869006';
-  const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech');
+  const message = encodeURIComponent(t('Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech.'));
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
@@ -12,7 +14,7 @@ const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-button"
-      aria-label="Fale conosco no WhatsApp"
+      aria-label={t("Fale conosco no WhatsApp")}
     >
       <svg
         className="whatsapp-icon"

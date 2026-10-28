@@ -1,3 +1,4 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
@@ -6,33 +7,19 @@ import { getProjectBySlug } from '../data/projects';
 import './ProjectDetails.css';
 
 const ProjectDetails = () => {
+  const { t, language, homePath } = useLanguage();
   const { slug } = useParams();
   const navigate = useNavigate();
-  const project = getProjectBySlug(slug);
+  const project = getProjectBySlug(slug, language);
+  const gallery = project?.gallery ?? [];
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleNavigateToSection = (e, sectionId) => {
     e.preventDefault();
-    navigate(`/#${sectionId}`, { replace: false });
+    navigate(`${homePath}#${sectionId}`, { replace: false });
     // O ScrollToTop vai lidar com o scroll para a seção
   };
-
-  if (!project) {
-    return (
-      <main className="project-details">
-        <SEO title="Projeto não encontrado" description="O projeto solicitado não foi localizado." />
-        <div className="project-details__empty">
-          <p className="project-details__eyebrow">Oops</p>
-          <h1>Projeto não encontrado</h1>
-          <p>O link pode estar desatualizado ou ter sido removido.</p>
-          <Link to="/" className="project-details__back">
-            Voltar para os projetos
-          </Link>
-        </div>
-      </main>
-    );
-  }
 
   const {
     title,
@@ -44,8 +31,7 @@ const ProjectDetails = () => {
     challenge,
     solution,
     results = [],
-    gallery = [],
-  } = project;
+  } = project ?? {};
 
   const openLightbox = (index) => {
     setCurrentImageIndex(index);
@@ -90,17 +76,33 @@ const ProjectDetails = () => {
     };
   }, []);
 
+  if (!project) {
+    return (
+      <main className="project-details">
+        <SEO title={t('Projeto não encontrado')} description={t('O projeto solicitado não foi localizado.')} />
+        <div className="project-details__empty">
+          <p className="project-details__eyebrow">Oops</p>
+          <h1>{t('Projeto não encontrado')}</h1>
+          <p>{t('O link pode estar desatualizado ou ter sido removido.')}</p>
+          <Link to={`${homePath}#projetos`} className="project-details__back">
+            {t('Voltar para os projetos')}
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="project-details">
       <SEO
-        title={`${title} | Projeto`}
+        title={`${title} | ${t('Projeto')}`}
         description={description}
         image={coverImage}
       />
 
       <section className="project-details__hero">
         <div className="project-details__copy">
-          <p className="project-details__eyebrow">Projeto em destaque</p>
+          <p className="project-details__eyebrow">{t("Projeto em destaque")}</p>
           <h1>{title}</h1>
           <p className="project-details__lead">{description}</p>
           <div className="project-details__tags">
@@ -118,19 +120,19 @@ const ProjectDetails = () => {
 
       <section className="project-details__grid">
         <div>
-          <h3>Visão geral</h3>
+          <h3>{t("Visão geral")}</h3>
           <p>{longDescription}</p>
         </div>
         <div>
-          <h3>Desafio</h3>
+          <h3>{t("Desafio")}</h3>
           <p>{challenge}</p>
         </div>
         <div>
-          <h3>Solução</h3>
+          <h3>{t("Solução")}</h3>
           <p>{solution}</p>
         </div>
         <div>
-          <h3>Resultados</h3>
+          <h3>{t("Resultados")}</h3>
           <ul>
             {results.map((item) => (
               <li key={item}>{item}</li>
@@ -142,16 +144,16 @@ const ProjectDetails = () => {
       <section className="project-gallery">
         <div className="project-gallery__header">
           <div>
-            <p className="project-details__eyebrow">Telas e fluxos</p>
-            <h3>Galeria do projeto</h3>
-            <p>Alguns recortes das jornadas principais.</p>
+            <p className="project-details__eyebrow">{t("Telas e fluxos")}</p>
+            <h3>{t("Galeria do projeto")}</h3>
+            <p>{t("Alguns recortes das jornadas principais.")}</p>
           </div>
           <a 
-            href="#contato" 
+            href={`${homePath}#contato`}
             className="project-gallery__cta"
             onClick={(e) => handleNavigateToSection(e, 'contato')}
           >
-            Quero algo assim
+            {t("Quero algo assim")}
           </a>
         </div>
         <div className="project-gallery__grid">
@@ -176,7 +178,7 @@ const ProjectDetails = () => {
           <button 
             className="lightbox__close"
             onClick={closeLightbox}
-            aria-label="Fechar visualização"
+            aria-label={t("Fechar visualização")}
           >
             <X size={24} />
           </button>
@@ -186,7 +188,7 @@ const ProjectDetails = () => {
               e.stopPropagation();
               prevImage();
             }}
-            aria-label="Imagem anterior"
+            aria-label={t("Imagem anterior")}
           >
             <ChevronLeft size={32} />
           </button>
@@ -196,7 +198,7 @@ const ProjectDetails = () => {
               e.stopPropagation();
               nextImage();
             }}
-            aria-label="Próxima imagem"
+            aria-label={t("Próxima imagem")}
           >
             <ChevronRight size={32} />
           </button>
@@ -218,18 +220,18 @@ const ProjectDetails = () => {
 
       <div className="project-details__footer">
         <a 
-          href="#projetos" 
+          href={`${homePath}#projetos`}
           className="project-details__back"
           onClick={(e) => handleNavigateToSection(e, 'projetos')}
         >
-          Voltar para projetos
+          {t("Voltar para projetos")}
         </a>
         <a 
-          href="#contato" 
+          href={`${homePath}#contato`}
           className="project-details__primary"
           onClick={(e) => handleNavigateToSection(e, 'contato')}
         >
-          Discutir um projeto
+          {t("Discutir um projeto")}
         </a>
       </div>
     </main>

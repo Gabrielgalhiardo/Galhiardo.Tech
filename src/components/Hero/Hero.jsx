@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import { useEffect, useRef } from 'react';
 import { Rocket, Gem, TrendingUp, Handshake } from 'lucide-react';
 import './Hero.css';
@@ -5,6 +6,7 @@ import Button from '../Button/Button';
 import Section from '../Section/Section';
 
 const Hero = () => {
+  const { t } = useLanguage();
   const heroRef = useRef(null);
 
   useEffect(() => {
@@ -33,13 +35,11 @@ const Hero = () => {
       <div className="hero__content" ref={heroRef}>
         <div className="hero__text">
           <h1 className="hero__title animate-fade-in-up">
-            Leve seu negócio para o{' '}
-            <span className="hero__highlight">próximo nível</span> digital
+            {t("Leve seu negócio para o")}{' '}
+            <span className="hero__highlight">{t("próximo nível")}</span> {t("digital")}
           </h1>
           <p className="hero__description animate-fade-in-up">
-            Sites profissionais, sistemas sob medida e a estratégia certa para quem 
-            quer vender mais. Transformamos sua empresa em uma autoridade na internet 
-            com tecnologia de ponta e design premium.
+            {t("Sites profissionais, sistemas sob medida e a estratégia certa para quem quer vender mais. Transformamos sua empresa em uma autoridade na internet com tecnologia de ponta e design premium.")}
           </p>
           <div className="hero__cta animate-fade-in-up">
             <Button 
@@ -47,7 +47,7 @@ const Hero = () => {
               size="lg" 
               onClick={handleScrollToContact}
             >
-              Solicitar Orçamento Grátis
+              {t("Solicitar Orçamento Grátis")}
             </Button>
             <Button 
               variant="outline" 
@@ -60,7 +60,7 @@ const Hero = () => {
                 }
               }}
             >
-              Ver Nossas Soluções
+              {t("Ver Nossas Soluções")}
             </Button>
           </div>
         </div>
@@ -72,29 +72,29 @@ const Hero = () => {
               <div className="hero__card-icon">
                 <Rocket size={32} />
               </div>
-              <h3>Velocidade</h3>
-              <p>Seu site abrindo instantaneamente</p>
+              <h3>{t("Velocidade")}</h3>
+              <p>{t("Seu site abrindo instantaneamente")}</p>
             </div>
             <div className="hero__card hero__card--2">
               <div className="hero__card-icon">
                 <Gem size={32} />
               </div>
-              <h3>Design Premium</h3>
-              <p>Visual que passa confiança</p>
+              <h3>{t("Design Premium")}</h3>
+              <p>{t("Visual que passa confiança")}</p>
             </div>
             <div className="hero__card hero__card--3">
               <div className="hero__card-icon">
                 <TrendingUp size={32} />
               </div>
-              <h3>Mais Vendas</h3>
-              <p>Foco total em conversão</p>
+              <h3>{t("Mais Vendas")}</h3>
+              <p>{t("Foco total em conversão")}</p>
             </div>
             <div className="hero__card hero__card--4">
               <div className="hero__card-icon">
                 <Handshake size={32} />
               </div>
-              <h3>Suporte Real</h3>
-              <p>Você nunca fica na mão</p>
+              <h3>{t("Suporte Real")}</h3>
+              <p>{t("Você nunca fica na mão")}</p>
             </div>
           </div>
         </div>

@@ -192,4 +192,18 @@ export const projects = [
   },
 ];
 
-export const getProjectBySlug = (slug) => projects.find((project) => project.slug === slug);
+// Keep image assets, brand names, and slugs shared between both languages.
+import { translate } from '../i18n/translations';
+
+export const getProjects = (language = 'pt') => projects.map((project) => ({
+  ...project,
+  description: translate(language, project.description),
+  longDescription: translate(language, project.longDescription),
+  challenge: translate(language, project.challenge),
+  solution: translate(language, project.solution),
+  tags: project.tags.map((tag) => translate(language, tag)),
+  results: project.results.map((result) => translate(language, result)),
+  gallery: project.gallery.map((image) => ({ ...image, alt: translate(language, image.alt) })),
+}));
+
+export const getProjectBySlug = (slug, language = 'pt') => getProjects(language).find((project) => project.slug === slug);

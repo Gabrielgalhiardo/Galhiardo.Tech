@@ -1,15 +1,19 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { localizedPath } from '../../i18n/translations';
 import './Navbar.css';
 import logo from '../../assets/img/logo.svg';
 import logoWithName from '../../assets/img/logo_with_name.svg';
 
 const Navbar = () => {
+  const { t, language, homePath } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname.replace(/\/$/, '') === homePath.replace(/\/$/, '');
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
@@ -76,7 +80,7 @@ const Navbar = () => {
       }
     } else {
       // Se estiver em outra página, redireciona para home com a seção
-      navigate(`/#${targetId}`, { replace: false });
+      navigate(`${homePath}#${targetId}`, { replace: false });
       // Aguarda a navegação e depois faz scroll
       setTimeout(() => {
         const element = document.getElementById(targetId);
@@ -101,7 +105,7 @@ const Navbar = () => {
         behavior: 'smooth'
       });
     } else {
-      navigate('/');
+      navigate(homePath);
     }
   };
 
@@ -114,7 +118,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
-        <a href="/" className="navbar__logo" onClick={handleLogoClick}>
+        <a href={homePath} className="navbar__logo" onClick={handleLogoClick}>
           <img src={logoWithName} alt="Galhiardo Tech" className="navbar__logo--desktop" />
           <img src={logo} alt="Galhiardo Tech" className="navbar__logo--mobile" />
         </a>
@@ -122,7 +126,7 @@ const Navbar = () => {
         <button
           ref={toggleRef}
           className="navbar__toggle"
-          aria-label="Toggle menu"
+          aria-label={t('Alternar menu')}
           aria-expanded={isMobileMenuOpen}
           onClick={handleToggleClick}
           type="button"
@@ -137,30 +141,40 @@ const Navbar = () => {
           className={`navbar__menu ${isMobileMenuOpen ? 'navbar__menu--open' : ''}`}
         >
           <li>
-            <a href="#home" onClick={(e) => handleLinkClick(e, 'home')}>Início</a>
+            <a href={`${homePath}#home`} onClick={(e) => handleLinkClick(e, 'home')}>{t("Início")}</a>
           </li>
           <li>
-            <a href="#servicos" onClick={(e) => handleLinkClick(e, 'servicos')}>Serviços</a>
+            <a href={`${homePath}#servicos`} onClick={(e) => handleLinkClick(e, 'servicos')}>{t("Serviços")}</a>
           </li>
           <li>
-            <a href="#projetos" onClick={(e) => handleLinkClick(e, 'projetos')}>Projetos</a>
+            <a href={`${homePath}#projetos`} onClick={(e) => handleLinkClick(e, 'projetos')}>{t("Projetos")}</a>
           </li>
           <li>
-            <a href="#sobre" onClick={(e) => handleLinkClick(e, 'sobre')}>Sobre</a>
+            <a href={`${homePath}#sobre`} onClick={(e) => handleLinkClick(e, 'sobre')}>{t("Sobre")}</a>
           </li>
           <li>
-            <a href="#depoimentos" onClick={(e) => handleLinkClick(e, 'depoimentos')}>Depoimentos</a>
+            <a href={`${homePath}#depoimentos`} onClick={(e) => handleLinkClick(e, 'depoimentos')}>{t("Depoimentos")}</a>
           </li>
           <li>
-            <a href="#contato" onClick={(e) => handleLinkClick(e, 'contato')}>Contato</a>
+            <a href={`${homePath}#contato`} onClick={(e) => handleLinkClick(e, 'contato')}>{t("Contato")}</a>
+          </li>
+          <li className="navbar__language">
+            <Link
+              to={`${localizedPath(location.pathname, language === 'en' ? 'pt' : 'en')}${location.search}${location.hash}`}
+              lang={language === 'en' ? 'pt-BR' : 'en'}
+              hrefLang={language === 'en' ? 'pt-BR' : 'en'}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {language === 'en' ? 'Português' : 'English'}
+            </Link>
           </li>
           <li className="navbar__cta">
             <a 
-              href="#contato" 
+              href={`${homePath}#contato`}
               className="btn btn--primary"
               onClick={(e) => handleLinkClick(e, 'contato')}
             >
-              Orçamento Grátis
+              {t("Orçamento Grátis")}
             </a>
           </li>
         </ul>

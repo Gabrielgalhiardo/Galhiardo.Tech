@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext';
 import { useState } from 'react';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import './Contato.css';
@@ -6,6 +7,7 @@ import Button from '../Button/Button';
 import Card from '../Card/Card';
 
 const Contato = () => {
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -42,7 +44,7 @@ const Contato = () => {
     const { name, value } = e.target;
     
     // Aplica máscara apenas no campo telefone
-    if (name === 'telefone') {
+    if (name === 'telefone' && language === 'pt') {
       const maskedValue = applyPhoneMask(value);
       setFormData(prev => ({
         ...prev,
@@ -60,22 +62,22 @@ const Contato = () => {
     e.preventDefault();
     
     // Formata a mensagem com os dados do formulário
-    let mensagem = 'Olá! Gostaria de entrar em contato sobre os serviços da Galhiardo.tech.\n\n';
+    let mensagem = `${t('Olá! Gostaria de entrar em contato sobre os serviços da Galhiardo.tech.')}\n\n`;
     
     if (formData.nome) {
-      mensagem += `*Nome:* ${formData.nome}\n`;
+      mensagem += `*${t('Nome')}:* ${formData.nome}\n`;
     }
     if (formData.email) {
       mensagem += `*Email:* ${formData.email}\n`;
     }
     if (formData.telefone) {
-      mensagem += `*Telefone:* ${formData.telefone}\n`;
+      mensagem += `*${t('Telefone')}:* ${formData.telefone}\n`;
     }
     if (formData.empresa) {
-      mensagem += `*Empresa:* ${formData.empresa}\n`;
+      mensagem += `*${t('Empresa')}:* ${formData.empresa}\n`;
     }
     if (formData.mensagem) {
-      mensagem += `\n*Mensagem:*\n${formData.mensagem}`;
+      mensagem += `\n*${t('Mensagem')}:*\n${formData.mensagem}`;
     }
     
     const phoneNumber = '5511950869006';
@@ -93,7 +95,7 @@ const Contato = () => {
     },
     {
       icon: Phone,
-      title: 'Telefone',
+      title: t("Telefone"),
       content: '+55 (11) 95086-9006',
       link: 'tel:+5511950869006'
     },
@@ -101,16 +103,16 @@ const Contato = () => {
       icon: MessageCircle,
       title: 'WhatsApp',
       content: '+55 (11) 95086-9006',
-      link: `https://wa.me/5511950869006?text=${encodeURIComponent('Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech.')}`
+      link: `https://wa.me/5511950869006?text=${encodeURIComponent(t("Olá! Gostaria de saber mais sobre os serviços da Galhiardo.tech."))}`
     }
   ];
 
   return (
     <Section id="contato" variant="default" className="contato">
       <div className="contato__header">
-        <h2 className="contato__title">Entre em Contato</h2>
+        <h2 className="contato__title">{t("Entre em Contato")}</h2>
         <p className="contato__subtitle">
-          Pronto para transformar seu negócio? Vamos conversar sobre como podemos ajudar você.
+          {t("Pronto para transformar seu negócio? Vamos conversar sobre como podemos ajudar você.")}
         </p>
       </div>
 
@@ -118,16 +120,16 @@ const Contato = () => {
         <div className="contato__form-wrapper">
           <Card variant="elevated" className="contato__form-card">
             <div className="contato__form-header">
-              <h3 className="contato__form-title">Preencha seus dados</h3>
+              <h3 className="contato__form-title">{t("Preencha seus dados")}</h3>
               <p className="contato__form-subtitle">
-                Envie sua mensagem diretamente pelo WhatsApp
+                {t("Envie sua mensagem diretamente pelo WhatsApp")}
               </p>
             </div>
             <form className="contato__form" onSubmit={handleWhatsAppRedirect}>
               <div className="contato__form-row">
                 <div className="contato__form-group">
                   <label htmlFor="nome" className="contato__label">
-                    Nome Completo
+                    {t("Nome Completo")}
                   </label>
                   <input
                     type="text"
@@ -136,7 +138,7 @@ const Contato = () => {
                     value={formData.nome}
                     onChange={handleChange}
                     className="contato__input"
-                    placeholder="Seu nome"
+                    placeholder={t("Seu nome")}
                   />
                 </div>
 
@@ -151,7 +153,7 @@ const Contato = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className="contato__input"
-                    placeholder="seu@email.com"
+                    placeholder={t("seu@email.com")}
                   />
                 </div>
               </div>
@@ -159,7 +161,7 @@ const Contato = () => {
               <div className="contato__form-row">
                 <div className="contato__form-group">
                   <label htmlFor="telefone" className="contato__label">
-                    Telefone
+                    {t("Telefone")}
                   </label>
                   <input
                     type="tel"
@@ -168,14 +170,14 @@ const Contato = () => {
                     value={formData.telefone}
                     onChange={handleChange}
                     className="contato__input"
-                    placeholder="(11) 99999-9999"
-                    maxLength={15}
+                    placeholder={language === 'en' ? '+1 555 123 4567' : '(11) 99999-9999'}
+                    maxLength={language === 'en' ? 30 : 15}
                   />
                 </div>
 
                 <div className="contato__form-group">
                   <label htmlFor="empresa" className="contato__label">
-                    Empresa
+                    {t("Empresa")}
                   </label>
                   <input
                     type="text"
@@ -184,14 +186,14 @@ const Contato = () => {
                     value={formData.empresa}
                     onChange={handleChange}
                     className="contato__input"
-                    placeholder="Nome da empresa"
+                    placeholder={t("Nome da empresa")}
                   />
                 </div>
               </div>
 
               <div className="contato__form-group">
                 <label htmlFor="mensagem" className="contato__label">
-                  Mensagem
+                  {t("Mensagem")}
                 </label>
                 <textarea
                   id="mensagem"
@@ -200,7 +202,7 @@ const Contato = () => {
                   onChange={handleChange}
                   rows="6"
                   className="contato__textarea"
-                  placeholder="Conte-nos sobre seu projeto ou necessidade..."
+                  placeholder={t("Conte-nos sobre seu projeto ou necessidade...")}
                 />
               </div>
 
@@ -211,7 +213,7 @@ const Contato = () => {
                 className="contato__submit"
               >
                 <MessageCircle size={20} className="contato__submit-icon" />
-                Enviar pelo WhatsApp
+                {t("Enviar pelo WhatsApp")}
               </Button>
             </form>
           </Card>
@@ -219,9 +221,9 @@ const Contato = () => {
 
         <div className="contato__info">
           <Card variant="bordered" className="contato__info-card">
-            <h3 className="contato__info-title">Outras formas de contato</h3>
+            <h3 className="contato__info-title">{t("Outras formas de contato")}</h3>
             <p className="contato__info-description">
-              Prefere falar diretamente? Entre em contato através dos canais abaixo.
+              {t("Prefere falar diretamente? Entre em contato através dos canais abaixo.")}
             </p>
 
             <div className="contato__info-list">
