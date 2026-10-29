@@ -10,6 +10,12 @@ Site profissional de consultoria em tecnologia desenvolvido com React, Vite e as
 - As traduções ficam em `src/i18n/translations.js`; o texto original em português é usado como chave e fallback. Nomes de empresas e capturas de tela dos projetos são preservados.
 - Para visualizar: `npm run dev`. Para gerar a versão de produção: `npm run build`. A hospedagem deve direcionar as rotas do site para `index.html`, como já necessário para os detalhes dos projetos.
 
+## Publicação na Vercel
+
+O arquivo `vercel.json`, ao lado de `package.json`, encaminha as rotas para `index.html`, permitindo abrir links internos diretamente e atualizar a página sem receber o erro 404 da Vercel. O React Router resolve a página solicitada mantendo o endereço original.
+
+Após publicar, confira o acesso direto e a atualização das rotas `/en`, `/projetos/altek` e `/en/projects/altek`. Alterações em `vercel.json` precisam de uma nova publicação para entrar em vigor.
+
 ### 1. Azul Royal (Cor Primária)
 **Código Hex:** `#2563EB`
 
